@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>La función calc de CSS</title>
+	<meta name="description" content="Blog sobre desarrollo de software" />
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="/blog.css">
+	<link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+	<link rel="alternate" href="." type="application/atom+xml" title="Iván Abascal Lozano">
+
+	<meta property="og:site_name" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:description" content="Blog sobre desarrollo de software" />
+	<meta property="og:url" content="https://abalozz.es/" />
+	<meta property="og:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta name="twitter:description" content="Blog sobre desarrollo de software" />
+	<meta name="twitter:url" content="https://abalozz.es/" />
+	<meta name="twitter:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:site" content="@nuzkito" />
+	<meta property="og:image:width" content="3200" />
+	<meta property="og:image:height" content="2368" />
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"publisher": {
+			"@type": "Organization",
+			"name": "Iván Abascal Lozano - Desarrollador de software",
+			"url": "https://abalozz.es/",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://abalozz.es/favicon.ico",
+				"width": 60,
+				"height": 60
+			}
+		},
+		"url": "https://abalozz.es/",
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://abalozz.es/images/2015/02/cover-o-1.jpg",
+			"width": 3200,
+			"height": 2368
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://abalozz.es/"
+		},
+		"description": "Blog sobre desarrollo de software"
+	}
+	</script>
+</head>
+
+<body>
+	<header class="Header">
+		<a href="/" class="main-link">
+			<h1 class="name">Iván Abascal Lozano</h1>
+			<p class="job">Desarrollador de software</p>
+		</a>
+		<div class="social-links">
+			<a class="social-link" target="_blank" href="https://twitter.com/nuzkito">
+				<svg class="icon icon-twitter">
+					<use xlink:href="#icon-twitter"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://github.com/abalozz">
+				<svg class="icon icon-github">
+					<use xlink:href="#icon-github"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://www.linkedin.com/in/abalozz/">
+				<svg class="icon icon-linkedin">
+					<use xlink:href="#icon-linkedin"></use>
+				</svg>
+			</a>
+		</div>
+	</header>
+
+	
+<main class="Content" role="main">
+	<article class="Post">
+		<header class="Post-header">
+				<h1 class="Post-title">La función calc de CSS</h1>
+			<section class="Post-meta">
+				<time class="Post-date" datetime="2014-07-04T17:08:01.000Z">4 de julio de 2014</time>
+				<span class="Post-readingTime">
+					3 minutos de lectura
+				</span>
+				<div class="Post-tags"><a href="/tag/CSS">CSS</a></div>
+			</section>
+		</header>
+		<section class="Post-content">
+			<p>Hablando con <a href="http://katarn.es/">Katarn</a> me sugirió que escribiera un artículo sobre cómo usar la función calc para crear interfaces. Esta función nos permite hacer cálculos dentro de las propias hojas de estilo.</p>
+<p>La función <code>calc</code> permite realizar operaciones con datos numéricos dentro de las hojas de estilos. Estas operaciones <strong>se realizan en tiempo de ejecución</strong>. Eso nos permite hacer cálculos combinando distintas unidades en una misma operación. Veamos algunos ejemplos en vivo:</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="css calc function" src="https://codepen.io/abalozz/embed/YzrBWw?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+	See the Pen <a href="https://codepen.io/abalozz/pen/YzrBWw">
+	on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+<h2>Operaciones aritméticas</h2>
+<p>Se pueden hacer las operaciones básicas de suma, resta, multiplicación y división. Las sumas y restas deben ser entre unidades, mientras que las multiplicaciones y divisiones deben ser entre una unidad y una o varias constantes. Por ejemplo, lo siguiente no funcionará:</p>
+<pre class="language-css"><code class="language-css"><span class="token comment">/* Incorrecto */</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>100px + 100<span class="token punctuation">)</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>20% * 3px<span class="token punctuation">)</span></code></pre>
+<p>Un detalle a tener en cuenta es que los signos de suma y resta <strong>deben estar separados por un espacio</strong> o no funcionarán.</p>
+<pre class="language-css"><code class="language-css"><span class="token comment">/* Incorrecto */</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>100px+100px<span class="token punctuation">)</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>100px +100px<span class="token punctuation">)</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>100px+ 100px<span class="token punctuation">)</span>
+
+<span class="token comment">/* Correcto */</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>100px + 100px<span class="token punctuation">)</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>100px + -100px<span class="token punctuation">)</span>
+<span class="token function">calc</span><span class="token punctuation">(</span>-100px + 100px<span class="token punctuation">)</span></code></pre>
+<p>Sin embargo las unidades sí podrán ir precedidas de un signo negativo, indicando que son números negativos.</p>
+<h2>Compatibilidad con navegadores</h2>
+<p><code>calc</code> <strong>es compatible con todos los navegadores modernos</strong>. En el caso de Internet Explorer, a partir de la versión 9.</p>
+<p>Algún navegador basado en Wekbit aún necesita usar el prefijo propietario, como puede ser el navegador de Blackberry 10.</p>
+<h2>Ejemplos</h2>
+<p>Actualmente estoy usando esta función para definir las medidas de <em>layouts</em> flexibles. En el siguiente ejemplo se podrá ver claramente la ventaja de usar calc:</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/abalozz/embed/NWaobw?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+	See the Pen <a href="https://codepen.io/abalozz/pen/NWaobw">
+	on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+<p>En el ejemplo queremos que el menú siempre tenga un ancho de 300px, mientras que la capa con contenido ocupe el resto del espacio. Para ello, a la capa de contenido le damos el siguiente ancho:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.contenido</span> <span class="token punctuation">{</span>
+	<span class="token property">width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span>100% - 300px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Es decir, ocupa todo el ancho posible - el <em>100%</em> - y réstale los 300px que mide el menú. Así no importa cuán ancha sea la pantalla. El contenido siempre va a ocupar toda la pantalla menos 300px.</p>
+<p>Para hacer este mismo ejemplo sin usar calc, se necesitaba poner el menú como capa absoluta o flotante. Y a la capa de contenido, darle un ancho del 100% y un margen equivalente al ancho del menú. La función calc simplifica esto, lo hace mucho más sencillo, y no necesitamos flotar los elementos, de forma que si necesitamos adaptarlo a pantallas pequeñas, simplemente con usar una <em>media query</em> que cambie a ambos el valor de <code>width</code> a 100% ya estaría resuelto.</p>
+<p>Otro ejemplo puede ser el siguiente:</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/abalozz/embed/oNGmZX?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/abalozz/pen/oNGmZX">
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+<p>En este caso la estructura es parecida a la de muchas aplicaciones para móviles. Una cabecera fija y un menú <em>off canvas</em>. Siempre queremos que el menú ocupe toda la altura disponible de la pantalla, pero dejando visible la cabecera.</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">header, nav</span> <span class="token punctuation">{</span>
+	<span class="token property">position</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">header</span> <span class="token punctuation">{</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> 2.8rem<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">nav</span> <span class="token punctuation">{</span>
+	<span class="token property">top</span><span class="token punctuation">:</span> 2.8rem<span class="token punctuation">;</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span>100vh - 2.8rem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Con <code>height: 100vh</code> podemos decirle que ocupe el 100% de la altura de la pantalla (Si no sabes qué son los vh, revisa <a href="/las-viewport-units-de-css3/">el artículo que escribí sobre las <em>viewport units</em></a>). Pero la cabecera tiene que estar visible, así que le restamos su altura.</p>
+
+		</section>
+	</article>
+</main>
+
+
+	<footer class="Footer site-footer clearfix">
+		<p>&copy; 2014 - 2023</p>
+	</footer>
+
+	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1"
+		xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<symbol id="icon-twitter" viewBox="0 0 24 28">
+				<title>twitter</title>
+				<path class="path1"
+					d="M20 9.531q-0.875 0.391-1.891 0.531 1.062-0.625 1.453-1.828-1.016 0.594-2.094 0.797-0.953-1.031-2.391-1.031-1.359 0-2.32 0.961t-0.961 2.32q0 0.453 0.078 0.75-2.016-0.109-3.781-1.016t-3-2.422q-0.453 0.781-0.453 1.656 0 1.781 1.422 2.734-0.734-0.016-1.563-0.406v0.031q0 1.172 0.781 2.086t1.922 1.133q-0.453 0.125-0.797 0.125-0.203 0-0.609-0.063 0.328 0.984 1.164 1.625t1.898 0.656q-1.813 1.406-4.078 1.406-0.406 0-0.781-0.047 2.312 1.469 5.031 1.469 1.75 0 3.281-0.555t2.625-1.484 1.883-2.141 1.172-2.531 0.383-2.633q0-0.281-0.016-0.422 0.984-0.703 1.641-1.703zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-linkedin" viewBox="0 0 24 28">
+				<title>linkedin</title>
+				<path class="path1"
+					d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906q-0.016-0.812-0.562-1.344t-1.453-0.531-1.477 0.531-0.57 1.344q0 0.797 0.555 1.336t1.445 0.539h0.016q0.922 0 1.484-0.539t0.562-1.336zM16.688 22.094h3.609v-6.219q0-2.406-1.141-3.641t-3.016-1.234q-2.125 0-3.266 1.828h0.031v-1.578h-3.609q0.047 1.031 0 10.844h3.609v-6.062q0-0.594 0.109-0.875 0.234-0.547 0.703-0.93t1.156-0.383q1.813 0 1.813 2.453v5.797zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-github" viewBox="0 0 24 28">
+				<title>github</title>
+				<path class="path1"
+					d="M6.156 21.125q-0.125 0.141-0.313-0.047-0.203-0.172-0.063-0.297 0.125-0.141 0.313 0.047 0.187 0.172 0.063 0.297zM5.5 20.172q0.141 0.187 0 0.297-0.125 0.094-0.266-0.109t0-0.281q0.141-0.109 0.266 0.094zM4.547 19.234q-0.078 0.109-0.203 0.031-0.156-0.078-0.109-0.187 0.047-0.078 0.203-0.031 0.156 0.078 0.109 0.187zM5.031 19.766q-0.094 0.109-0.25-0.047-0.141-0.172-0.031-0.25 0.094-0.094 0.25 0.047 0.141 0.172 0.031 0.25zM7.047 21.516q-0.063 0.187-0.297 0.094-0.266-0.063-0.203-0.234t0.297-0.109q0.25 0.078 0.203 0.25zM8.031 21.594q0 0.172-0.25 0.172-0.266 0.031-0.266-0.172 0-0.172 0.25-0.172 0.266-0.031 0.266 0.172zM8.937 21.438q0.031 0.156-0.219 0.219t-0.281-0.125 0.219-0.234q0.25-0.031 0.281 0.141zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-3.5q-0.25 0-0.383-0.016t-0.305-0.078-0.25-0.227-0.078-0.43v-3.734q0-1.516-0.812-2.219 0.891-0.094 1.602-0.281t1.469-0.609 1.266-1.039 0.828-1.641 0.32-2.352q0-1.891-1.234-3.219 0.578-1.422-0.125-3.187-0.438-0.141-1.266 0.172t-1.437 0.688l-0.594 0.375q-1.453-0.406-3-0.406t-3 0.406q-0.25-0.172-0.664-0.422t-1.305-0.602-1.344-0.211q-0.688 1.766-0.109 3.187-1.234 1.328-1.234 3.219 0 1.328 0.32 2.344t0.82 1.641 1.258 1.047 1.469 0.609 1.602 0.281q-0.625 0.562-0.766 1.609-0.328 0.156-0.703 0.234t-0.891 0.078-1.023-0.336-0.867-0.977q-0.297-0.5-0.758-0.812t-0.773-0.375l-0.313-0.047q-0.328 0-0.453 0.070t-0.078 0.18 0.141 0.219 0.203 0.187l0.109 0.078q0.344 0.156 0.68 0.594t0.492 0.797l0.156 0.359q0.203 0.594 0.688 0.961t1.047 0.469 1.086 0.109 0.867-0.055l0.359-0.063q0 0.594 0.008 1.609t0.008 1.062q0 0.344-0.172 0.523t-0.344 0.203-0.516 0.023h-3.5q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+		</defs>
+	</svg>
+</body>
+
+</html>

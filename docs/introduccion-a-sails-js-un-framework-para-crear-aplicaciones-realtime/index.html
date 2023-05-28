@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>Introducción a Sails.js, un framework para crear aplicaciones realtime</title>
+	<meta name="description" content="Blog sobre desarrollo de software" />
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="/blog.css">
+	<link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+	<link rel="alternate" href="." type="application/atom+xml" title="Iván Abascal Lozano">
+
+	<meta property="og:site_name" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:description" content="Blog sobre desarrollo de software" />
+	<meta property="og:url" content="https://abalozz.es/" />
+	<meta property="og:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta name="twitter:description" content="Blog sobre desarrollo de software" />
+	<meta name="twitter:url" content="https://abalozz.es/" />
+	<meta name="twitter:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:site" content="@nuzkito" />
+	<meta property="og:image:width" content="3200" />
+	<meta property="og:image:height" content="2368" />
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"publisher": {
+			"@type": "Organization",
+			"name": "Iván Abascal Lozano - Desarrollador de software",
+			"url": "https://abalozz.es/",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://abalozz.es/favicon.ico",
+				"width": 60,
+				"height": 60
+			}
+		},
+		"url": "https://abalozz.es/",
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://abalozz.es/images/2015/02/cover-o-1.jpg",
+			"width": 3200,
+			"height": 2368
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://abalozz.es/"
+		},
+		"description": "Blog sobre desarrollo de software"
+	}
+	</script>
+</head>
+
+<body>
+	<header class="Header">
+		<a href="/" class="main-link">
+			<h1 class="name">Iván Abascal Lozano</h1>
+			<p class="job">Desarrollador de software</p>
+		</a>
+		<div class="social-links">
+			<a class="social-link" target="_blank" href="https://twitter.com/nuzkito">
+				<svg class="icon icon-twitter">
+					<use xlink:href="#icon-twitter"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://github.com/abalozz">
+				<svg class="icon icon-github">
+					<use xlink:href="#icon-github"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://www.linkedin.com/in/abalozz/">
+				<svg class="icon icon-linkedin">
+					<use xlink:href="#icon-linkedin"></use>
+				</svg>
+			</a>
+		</div>
+	</header>
+
+	
+<main class="Content" role="main">
+	<article class="Post">
+		<header class="Post-header">
+				<h1 class="Post-title">Introducción a Sails.js, un framework para crear aplicaciones realtime</h1>
+			<section class="Post-meta">
+				<time class="Post-date" datetime="2014-08-02T16:55:50.000Z">2 de agosto de 2014</time>
+				<span class="Post-readingTime">
+					6 minutos de lectura
+				</span>
+				<div class="Post-tags"><a href="/tag/Nodejs2">Nodejs2</a><a href="/tag/JavaScript">JavaScript</a></div>
+			</section>
+		</header>
+		<section class="Post-content">
+			<p><img src="/images/2014/Aug/sails.png" alt=""></p>
+<p><a href="http://www.sailsjs.org">Sails.js</a> es un framework para <a href="http://nodejs.org/">Node.js</a>. Está realizado bajo el <a href="http://expressjs.com/">framework Express</a>, incluyendo varias capas de abstracción para hacer un desarrollo más fácil. Posee un <a href="http://es.wikipedia.org/wiki/Mapeo_objeto-relacional">ORM</a>, métodos para crear <a href="http://es.wikipedia.org/wiki/Representational_State_Transfer">API RESTful</a> y soporte para manejar peticiones en tiempo real <a href="http://socket.io/">gracias a Socket.io</a>. Es especialmente bueno para realizar <strong>aplicaciones que funcionan en tiempo real</strong>, como chats, juegos, o aplicaciones colaborativas.</p>
+<p>El día de ayer lanzaron la versión 0.10 de este framework. A continuación veremos una introducción al mismo para comprobar lo sencillo que puede llegar a ser.</p>
+<h2>Instalación</h2>
+<p>Como cualquier otra dependencia de Node.js, Sails se instala mediante npm:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">npm</span> <span class="token function">install</span> sails <span class="token parameter variable">-g</span></code></pre>
+<p>Esto instalará la última versión en nuestro sistema.</p>
+<p>Para generar un proyecto hay que ejecutar el comando <code>sails new</code>. Automáticamente <strong>generará todos los archivos necesarios</strong>:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">mkdir</span> sails-example
+<span class="token builtin class-name">cd</span> sails-example
+sails new
+sails lift</code></pre>
+<p>Sails también generará el <code>package.json</code> y una serie de archivos de Grunt para automatizar diversas tareas.</p>
+<p>Con <code>sails lift</code> le decimos que inicie el servidor. Con esto ya tenemos el framework funcionando y listo para comenzar el desarrollo.</p>
+<h2>Creando una API REST en 2 minutos</h2>
+<p>Sails incorpora métodos para crear de forma muy sencilla una API REST, y también tiene un generador de modelos y controladores.</p>
+<p>Vamos a crear una aplicación sencilla que permite enviar y recibir mensajes. Para ello crearemos un modelo Mensajes:</p>
+<pre class="language-bash"><code class="language-bash">sails generate api message</code></pre>
+<p>Esto nos generará un controlador y un modelo para manejar los mensajes. Ahora volvemos a ejecutar <code>sails lift</code> y accedemos a http://localhost:1337/message.</p>
+<p>Y... ¡Oops! Nos muestra una página en blanco con unos corchetes. Eso es porque no tenemos ningún mensaje, así que creemos alguno.</p>
+<p>Para probarlo puedes utilizar algún plugin para el navegador que uses. Por ejemplo RESTClient o RESTConsole. Estos plugins permitirán probar las API sin necesidad de implementarlas.</p>
+<p><img src="/images/2014/Aug/enviando-un-mensaje.png" alt=""></p>
+<p>Enviaremos una petición POST a la ruta antes mencionada que tenga como contenido el mensaje. En la respuesta veremos que el servidor nos devuelve el mensaje creado, y si volvemos a http://localhost:1337/message veremos que el mensaje aparece.</p>
+<p>¿Habéis visto qué sencillo? ¡Y <strong>aún no hemos tenido que tocar el código</strong> para nada! El único problema es que no existen limitaciones de ningún tipo, por lo que si enviamos más parámetros aparte de <code>content</code>, Sails los guardará en el modelo. Es ahora cuando tenemos que ir al código para definir las reglas. Pero eso lo detallaremos más adelante, en otro artículo ;)</p>
+<h2>Realtime</h2>
+<p>Sails.js implementa la API a través de socket.io, por lo que nos podemos suscribir a diversas rutas. Cuando alguien haga un cambio de la base de datos, automáticamente <strong>se enviarán los nuevos datos a todos los clientes conectados</strong>.</p>
+<p>Para esto Sails implementa los métodos get, post, put y delete sobre Socket.io. Para poder usar esto necesitamos incluir un archivo en nuestro HTML, que se encuentra en la ruta <code>/js/dependencies/sails.io.js</code>, dentro del directorio assets. Este es el directorio que mostrará como público y en el que estarán todos los archivos del cliente.</p>
+<p>Vamos a crear una página simple en la que mostrar el ejemplo. Pero antes de nada vamos a definir una ruta en la que mostraremos el ejemplo. Para ello abrimos el archivo <code>/config/routes.js</code> y añadimos:</p>
+<pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
+	<span class="token operator">...</span>
+	<span class="token string-property property">'/'</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		<span class="token literal-property property">view</span><span class="token operator">:</span> <span class="token string">'homepage'</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+	<span class="token string-property property">'/app'</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		<span class="token literal-property property">view</span><span class="token operator">:</span> <span class="token string">'app'</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token operator">...</span>
+<span class="token punctuation">}</span></code></pre>
+<p>En este archivo podremos configurar nuestras propias rutas. lo que hacemos es asignar a la ruta <code>/app</code> una vista llamada <code>app</code>. Ahora creamos esa vista. La guardaremos en <code>views/app.ejs</code>. Sails viene con el sistema de plantillas EJS, pero puede ser sustituido con facilidad por el de vuestra preferencia modificando la configuración.</p>
+<pre class="language-html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Mensajes realtime<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Envía un mensaje:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>send<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Mensaje...<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Enviar<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mensajes<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/js/dependencies/sails.io.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+			<span class="token keyword">var</span> mensajes <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#mensajes'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">var</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#button'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">var</span> input <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#send'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			<span class="token keyword">function</span> <span class="token function">addMessage</span><span class="token punctuation">(</span><span class="token parameter">content</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			mensajes<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">'&lt;li>'</span> <span class="token operator">+</span> content <span class="token operator">+</span> <span class="token string">'&lt;/li>'</span> <span class="token operator">+</span> mensajes<span class="token punctuation">.</span>innerHTML<span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+
+			io<span class="token punctuation">.</span>socket<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token function">addMessage</span><span class="token punctuation">(</span>value<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			button<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+				<span class="token literal-property property">content</span><span class="token operator">:</span> input<span class="token punctuation">.</span>value
+			<span class="token punctuation">}</span>
+			io<span class="token punctuation">.</span>socket<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/message'</span><span class="token punctuation">,</span> data<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				input<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			io<span class="token punctuation">.</span>socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>verb <span class="token operator">===</span> <span class="token string">'created'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token function">addMessage</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+<p>Con esto ya tenemos nuestra pequeña aplicación.</p>
+<p>Inicialmente recogemos algunos elementos del DOM necesarios y creamos una función que agrega los mensajes a una lista:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">var</span> mensajes <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#mensajes'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> button <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#button'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> input <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#send'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">addMessage</span><span class="token punctuation">(</span><span class="token parameter">content</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	mensajes<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">'&lt;li>'</span> <span class="token operator">+</span> content <span class="token operator">+</span> <span class="token string">'&lt;/li>'</span> <span class="token operator">+</span> mensajes<span class="token punctuation">.</span>innerHTML<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Obtenemos todos los mensajes y los mostramos:</p>
+<pre class="language-js"><code class="language-js">io<span class="token punctuation">.</span>socket<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	data<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token function">addMessage</span><span class="token punctuation">(</span>value<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Enviamos nuestro mensaje cuando hagamos click en el botón de enviar:</p>
+<pre class="language-js"><code class="language-js">button<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+		<span class="token literal-property property">content</span><span class="token operator">:</span> input<span class="token punctuation">.</span>value
+	<span class="token punctuation">}</span>
+	io<span class="token punctuation">.</span>socket<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/message'</span><span class="token punctuation">,</span> data<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		input<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Y nos suscribimos al socket de mensajes para que cada vez que se introduzca un mensaje nuevo nos lo notifique:</p>
+<pre class="language-js"><code class="language-js">io<span class="token punctuation">.</span>socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>verb <span class="token operator">===</span> <span class="token string">'created'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token function">addMessage</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>¡Y listo! Cada vez que enviemos un mensaje a través de <code>io.socket.post()</code> se notificará a todos los clientes conectados, y se ejecutará el callback que hemos pasado a <code>io.socket.on()</code>. En la respuesta se indicará el verbo utilizado. En este caso solo queremos mostrar los mensajes creados, pero también podríamos hacer que se pudiesen actualizar y eliminar mensajes. Para hacerlo tenemos <code>io.socket.put()</code> y <code>io.socket.delete()</code>.</p>
+<p>Ahora, tan solo abre dos navegadores y disfruta. Y lo mejor de todo es que hacer esto no toma más que unos minutos.</p>
+<hr>
+<p>Ya hemos visto lo sencillo que puede ser trabajar con Sails. Por supuesto, como todo framework, para dominarlo hay que practicar. Más adelante publicaré algún artículo más detallado. Pero si Sails te interesa puedes <a href="http://sailsjs.org/#/documentation/">acceder a la documentación</a> ya mismo.</p>
+<p>Y cuando lo hayas hecho, envíame un tweet a <a href="https://twitter.com/nuzkito">@nuzkito</a> o deja un comentario y cuéntame qué te ha parecido o qué proyectos estás haciendo con Sails.</p>
+
+		</section>
+	</article>
+</main>
+
+
+	<footer class="Footer site-footer clearfix">
+		<p>&copy; 2014 - 2023</p>
+	</footer>
+
+	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1"
+		xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<symbol id="icon-twitter" viewBox="0 0 24 28">
+				<title>twitter</title>
+				<path class="path1"
+					d="M20 9.531q-0.875 0.391-1.891 0.531 1.062-0.625 1.453-1.828-1.016 0.594-2.094 0.797-0.953-1.031-2.391-1.031-1.359 0-2.32 0.961t-0.961 2.32q0 0.453 0.078 0.75-2.016-0.109-3.781-1.016t-3-2.422q-0.453 0.781-0.453 1.656 0 1.781 1.422 2.734-0.734-0.016-1.563-0.406v0.031q0 1.172 0.781 2.086t1.922 1.133q-0.453 0.125-0.797 0.125-0.203 0-0.609-0.063 0.328 0.984 1.164 1.625t1.898 0.656q-1.813 1.406-4.078 1.406-0.406 0-0.781-0.047 2.312 1.469 5.031 1.469 1.75 0 3.281-0.555t2.625-1.484 1.883-2.141 1.172-2.531 0.383-2.633q0-0.281-0.016-0.422 0.984-0.703 1.641-1.703zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-linkedin" viewBox="0 0 24 28">
+				<title>linkedin</title>
+				<path class="path1"
+					d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906q-0.016-0.812-0.562-1.344t-1.453-0.531-1.477 0.531-0.57 1.344q0 0.797 0.555 1.336t1.445 0.539h0.016q0.922 0 1.484-0.539t0.562-1.336zM16.688 22.094h3.609v-6.219q0-2.406-1.141-3.641t-3.016-1.234q-2.125 0-3.266 1.828h0.031v-1.578h-3.609q0.047 1.031 0 10.844h3.609v-6.062q0-0.594 0.109-0.875 0.234-0.547 0.703-0.93t1.156-0.383q1.813 0 1.813 2.453v5.797zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-github" viewBox="0 0 24 28">
+				<title>github</title>
+				<path class="path1"
+					d="M6.156 21.125q-0.125 0.141-0.313-0.047-0.203-0.172-0.063-0.297 0.125-0.141 0.313 0.047 0.187 0.172 0.063 0.297zM5.5 20.172q0.141 0.187 0 0.297-0.125 0.094-0.266-0.109t0-0.281q0.141-0.109 0.266 0.094zM4.547 19.234q-0.078 0.109-0.203 0.031-0.156-0.078-0.109-0.187 0.047-0.078 0.203-0.031 0.156 0.078 0.109 0.187zM5.031 19.766q-0.094 0.109-0.25-0.047-0.141-0.172-0.031-0.25 0.094-0.094 0.25 0.047 0.141 0.172 0.031 0.25zM7.047 21.516q-0.063 0.187-0.297 0.094-0.266-0.063-0.203-0.234t0.297-0.109q0.25 0.078 0.203 0.25zM8.031 21.594q0 0.172-0.25 0.172-0.266 0.031-0.266-0.172 0-0.172 0.25-0.172 0.266-0.031 0.266 0.172zM8.937 21.438q0.031 0.156-0.219 0.219t-0.281-0.125 0.219-0.234q0.25-0.031 0.281 0.141zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-3.5q-0.25 0-0.383-0.016t-0.305-0.078-0.25-0.227-0.078-0.43v-3.734q0-1.516-0.812-2.219 0.891-0.094 1.602-0.281t1.469-0.609 1.266-1.039 0.828-1.641 0.32-2.352q0-1.891-1.234-3.219 0.578-1.422-0.125-3.187-0.438-0.141-1.266 0.172t-1.437 0.688l-0.594 0.375q-1.453-0.406-3-0.406t-3 0.406q-0.25-0.172-0.664-0.422t-1.305-0.602-1.344-0.211q-0.688 1.766-0.109 3.187-1.234 1.328-1.234 3.219 0 1.328 0.32 2.344t0.82 1.641 1.258 1.047 1.469 0.609 1.602 0.281q-0.625 0.562-0.766 1.609-0.328 0.156-0.703 0.234t-0.891 0.078-1.023-0.336-0.867-0.977q-0.297-0.5-0.758-0.812t-0.773-0.375l-0.313-0.047q-0.328 0-0.453 0.070t-0.078 0.18 0.141 0.219 0.203 0.187l0.109 0.078q0.344 0.156 0.68 0.594t0.492 0.797l0.156 0.359q0.203 0.594 0.688 0.961t1.047 0.469 1.086 0.109 0.867-0.055l0.359-0.063q0 0.594 0.008 1.609t0.008 1.062q0 0.344-0.172 0.523t-0.344 0.203-0.516 0.023h-3.5q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+		</defs>
+	</svg>
+</body>
+
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>Tutorial de Stylus: No temas a la terminal</title>
+	<meta name="description" content="Blog sobre desarrollo de software" />
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="/blog.css">
+	<link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+	<link rel="alternate" href="." type="application/atom+xml" title="Iván Abascal Lozano">
+
+	<meta property="og:site_name" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:description" content="Blog sobre desarrollo de software" />
+	<meta property="og:url" content="https://abalozz.es/" />
+	<meta property="og:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta name="twitter:description" content="Blog sobre desarrollo de software" />
+	<meta name="twitter:url" content="https://abalozz.es/" />
+	<meta name="twitter:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:site" content="@nuzkito" />
+	<meta property="og:image:width" content="3200" />
+	<meta property="og:image:height" content="2368" />
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"publisher": {
+			"@type": "Organization",
+			"name": "Iván Abascal Lozano - Desarrollador de software",
+			"url": "https://abalozz.es/",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://abalozz.es/favicon.ico",
+				"width": 60,
+				"height": 60
+			}
+		},
+		"url": "https://abalozz.es/",
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://abalozz.es/images/2015/02/cover-o-1.jpg",
+			"width": 3200,
+			"height": 2368
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://abalozz.es/"
+		},
+		"description": "Blog sobre desarrollo de software"
+	}
+	</script>
+</head>
+
+<body>
+	<header class="Header">
+		<a href="/" class="main-link">
+			<h1 class="name">Iván Abascal Lozano</h1>
+			<p class="job">Desarrollador de software</p>
+		</a>
+		<div class="social-links">
+			<a class="social-link" target="_blank" href="https://twitter.com/nuzkito">
+				<svg class="icon icon-twitter">
+					<use xlink:href="#icon-twitter"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://github.com/abalozz">
+				<svg class="icon icon-github">
+					<use xlink:href="#icon-github"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://www.linkedin.com/in/abalozz/">
+				<svg class="icon icon-linkedin">
+					<use xlink:href="#icon-linkedin"></use>
+				</svg>
+			</a>
+		</div>
+	</header>
+
+	
+<main class="Content" role="main">
+	<article class="Post">
+		<header class="Post-header">
+				<h1 class="Post-title">Tutorial de Stylus: No temas a la terminal</h1>
+			<section class="Post-meta">
+				<time class="Post-date" datetime="2014-08-26T15:08:01.000Z">26 de agosto de 2014</time>
+				<span class="Post-readingTime">
+					8 minutos de lectura
+				</span>
+				<div class="Post-tags"><a href="/tag/Stylus">Stylus</a><a href="/tag/Tutorial">Tutorial</a><a href="/tag/CSS">CSS</a></div>
+			</section>
+		</header>
+		<section class="Post-content">
+			<p>En el anterior artículo hablé sobre <a href="/que-es-un-preprocesador-de-css/">qué es un preprocesador de CSS</a>. Si no tienes claro qué es o por qué es bueno usarlos <strong>léelo antes</strong>.</p>
+<p>Este artículo será el primero de una serie de artículos sobre Stylus. Trataré de explicarlo todo partiendo de lo básico, y avanzando hasta que puedas ser un experto en Stylus. Pero si no quieres esperar <a href="http://learnboost.github.io/stylus/">puedes revisar ya mismo la documentación</a>.</p>
+<p>Antes de comenzar haré un apunte: <strong>Stylus NO se instala en el servidor</strong>. Stylus genera un archivo CSS. Ese archivo generado es el que debéis subir al servidor. Es una duda que tiene mucha gente al comenzar con preprocesadores, por lo que es importante tenerlo claro desde el principio.</p>
+<h2>Sintaxis de Stylus</h2>
+<p>Lo primero que debes saber sobre Stylus es cómo es su Sintaxis. En Stylus <strong>se pueden omitir</strong> las <em>llaves</em> <code>{}</code>, los <em>dos puntos</em> <code>:</code> y los <em>punto y coma</em> <code>;</code>. Stylus se encargará por nosotros de ponerlos en el CSS final.</p>
+<p>Como no se usan llaves, <strong>la forma de indentificar las propiedades que van con cada selector es mediante el sangrado o <em>indentación</em></strong>. Lo normal es dejar 4 espacios de separación con el margen.</p>
+<p>Si tenemos el siguiente código en CSS</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">body</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #111<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>en Stylus sería así:</p>
+<pre class="language-stylus"><code class="language-stylus"><span class="token selector">body</span>
+    <span class="token property-declaration"><span class="token property">color</span> <span class="token hexcode">#111</span></span></code></pre>
+<p>Esto simplifica el código, y nos puede evitar errores al escribir el código, como olvidar cerrar una llave o poner un punto y coma.</p>
+<h2>Instalación</h2>
+<p>Stylus está construido sobre <a href="http://nodejs.org/">Node.js</a>, por lo que para instalar Stylus antes necesitamos instalar Node en nuestra máquina. Desde <a href="http://nodejs.org/">su sitio web</a> puedes descargar el paquete e instalarlo. Si estás en Linux te recomiendo instalarlo desde un repositorio:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> add-apt-repository ppa:chris-lea/node.js
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nodejs <span class="token function">npm</span></code></pre>
+<p>Para comprobar que Node.js se instaló correctamente pon en la terminal <code>node -v</code>.</p>
+<p>Una vez instalado Node.js, usaremos el gestor de paquetes de Node.js para instalar el paquete de Stylus. Este gestor es <a href="https://www.npmjs.org/">npm</a> (Node Package Manager). Para instalar Stylus con este gestor ejecutamos en la terminal lo siguiente:</p>
+<pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> stylus</code></pre>
+<blockquote>
+<p>Para instalar paquetes de forma global necesitas permisos de administrador. Por eso debes poner <em>sudo</em> o lo equivalente en tu sistema operativo.<br>
+En Windows debes ejecutar la consola con permisos de administrador.</p>
+</blockquote>
+<p>Ahora solo esperamos a que se descarguen todos los archivos y listo. Con <code>-g</code> le decimos a npm que instale Stylus de forma global en el equipo. Es decir, será accesible desde cualquier directorio de nuestra máquina.</p>
+<p>También podemos instalar Stylus de forma local para un solo proyecto si omitimos el <code>-g</code>. Esto es algo que recomiendo si trabajáis en proyectos con otras personas. De esta forma nos aseguramos que todas las personas del equipo trabajen con la misma versión de Stylus.</p>
+<p>Te recomiendo investigar un poco sobre Node.js y Npm para saber cómo funcionan y poder aprovecharlo mejor.</p>
+<p>Para comprobar que Stylus se ha instalado correctamente tan solo ejecuta <code>stylus -V</code>. Esto debería decirte la versión. Al momento de escribir este artículo es la <code>0.48.1</code>.</p>
+<p>Si en el futuro quieres actualizar Stylus a la última versión debes ejecutar <code>sudo npm update -g stylus</code>.</p>
+<h2>Stylus desde la terminal</h2>
+<blockquote>
+<p>La terminal no debe darte miedo. Es tu amiga. Solo intenta ponerte las cosas más fácil.</p>
+</blockquote>
+<p>Terminal, consola, línea de comandos... llámala como quieras. Saber usar la terminal es importante. Stylus viene con varias funciones ejecutables desde la terminal para convertir Stylus a CSS.</p>
+<p>Para ver todas las funciones, y una ayuda de las mismas, podemos ejecutar <code>stylus --help</code>. Mostraré a continuación cómo usar las opciones más comunes.</p>
+<p>Para las pruebas, crea un archivo llamado <code>estilos.styl</code> con el siguiente contenido:</p>
+<pre class="language-stylus"><code class="language-stylus"><span class="token selector">body</span>
+	<span class="token property-declaration"><span class="token property">font-family</span> Arial</span>
+	<span class="token property-declaration"><span class="token property">font-size</span> <span class="token number">16</span><span class="token unit">px</span></span>
+	<span class="token property-declaration"><span class="token property">color</span> <span class="token hexcode">#111</span></span>
+
+<span class="token selector">.header</span>
+	<span class="token property-declaration"><span class="token property">background-color</span> <span class="token hexcode">#333</span></span>
+
+	<span class="token selector">.title</span>
+		<span class="token property-declaration"><span class="token property">color</span> <span class="token hexcode">#fff</span></span></code></pre>
+<h3>Convertir de Stylus a CSS</h3>
+<p>Para convertir un archivo de Stylus a CSS tan solo hace falta poner <code>stylus estilos.styl</code>. En la terminal nos aparecerá un mensaje como el siguiente:</p>
+<pre class="language-bash"><code class="language-bash">compiled estilos.css</code></pre>
+<p>En este caso, el archivo se ha procesado correctamente. Y si observamos el directorio veremos que se ha creado un archivo <code>estilos.css</code>, que debe tener el siguiente contenido:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">body</span> <span class="token punctuation">{</span>
+	<span class="token property">font-family</span><span class="token punctuation">:</span> Arial<span class="token punctuation">;</span>
+	<span class="token property">font-size</span><span class="token punctuation">:</span> 16px<span class="token punctuation">;</span>
+	<span class="token property">color</span><span class="token punctuation">:</span> #111<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.header</span> <span class="token punctuation">{</span>
+	<span class="token property">background-color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.header .title</span> <span class="token punctuation">{</span>
+	<span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong>Si hay algún error, Stylus nos avisará</strong> e intentará decirnos la línea del error y otros datos para debug. Cometamos un error a propósito para comprobarlo, por ejemplo poniendo un menos delante de un color. Nos devolverá esto:</p>
+<pre class="language-bash"><code class="language-bash">/usr/lib/node_modules/stylus/bin/stylus:644
+              throw err<span class="token punctuation">;</span>
+                    ^
+Error: estilos.styl:7:23
+    <span class="token number">3</span><span class="token operator">|</span>     font-size 16px
+    <span class="token number">4</span><span class="token operator">|</span>     color <span class="token comment">#111</span>
+    <span class="token number">5</span><span class="token operator">|</span> 
+    <span class="token number">6</span><span class="token operator">|</span> .header
+    <span class="token number">7</span><span class="token operator">|</span>     background-color -<span class="token comment">#333</span>
+----------------------------^
+    <span class="token number">8</span><span class="token operator">|</span> 
+    <span class="token number">9</span><span class="token operator">|</span>     .title
+   <span class="token number">10</span><span class="token operator">|</span>         color <span class="token comment">#fff</span>
+
+<span class="token punctuation">..</span>.</code></pre>
+<p>Como veis, <strong>Stylus nos tratará de ayudar a encontrar el error</strong>.</p>
+<p>También podemos querer guardar el archivo en un directorio diferente. Podemos usar <code>--out</code> o <code>-o</code>. Si queremos guardar nuestro archivo en el directorio <code>css/</code> pondremos lo siguiente:</p>
+<pre class="language-bash"><code class="language-bash">stylus estilos.styl <span class="token parameter variable">--out</span> css/</code></pre>
+<blockquote>
+<p><em><strong>Nota:</strong></em><br>
+El directorio <code>css/</code> debe estar creado. Si no, fallará.</p>
+</blockquote>
+<p>También podemos hacer lo siguiente:</p>
+<pre class="language-bash"><code class="language-bash">stylus <span class="token operator">&lt;</span> estilos.styl <span class="token operator">></span> css/app.css</code></pre>
+<p>Después de <code>&lt;</code> ponemos el archivo de stylus. Tras el <code>&gt;</code> indicamos la ruta y el nombre del archivo css.</p>
+<h3>Compresión</h3>
+<p>Stylus puede comprimir en una sola línea todo el código CSS resultante con la opción <code>--compress</code> o <code>-c</code>:</p>
+<pre class="language-bash"><code class="language-bash">stylus <span class="token parameter variable">-c</span> estilos.css</code></pre>
+<p>El resultado será el siguiente:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">{</span><span class="token property">font-family</span><span class="token punctuation">:</span>Arial<span class="token punctuation">;</span><span class="token property">font-size</span><span class="token punctuation">:</span>16px<span class="token punctuation">;</span><span class="token property">color</span><span class="token punctuation">:</span>#111<span class="token punctuation">}</span><span class="token selector">.header</span><span class="token punctuation">{</span><span class="token property">background-color</span><span class="token punctuation">:</span>#333<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token selector">.header .title</span><span class="token punctuation">{</span><span class="token property">color</span><span class="token punctuation">:</span>#fff<span class="token punctuation">}</span></code></pre>
+<p>Gracias a la compresión el archivo pesará algo menos y tardará menos en descargarse en el navegador del usuario. Es una buena práctica que el CSS que sirváis a los navegadores esté comprimido.</p>
+<h3>Convertir automáticamente cuando haya cambios</h3>
+<p>Tenemos el inconveniente de que cada vez que hagamos un cambio tendremos que ejecutar nuevamente Stylus para convertir los archivos a CSS. Para solventar esto podemos decirle a Stylus que se mantenga <em>escuchando</em> al archivo seleccionado para que se ejecute automáticamente cuando hagamos un cambio. Lo podemos hacer con la opción <code>--watch</code> o <code>-w</code>:</p>
+<pre class="language-bash"><code class="language-bash">stylus <span class="token parameter variable">-w</span> estilos.styl</code></pre>
+<p>Ahora solo tenemos que dejar la terminal abierta y comenzar a trabajar con el archivo. En cuanto guardemos, el CSS se actualizará.</p>
+<h3>Convertir CSS a Stylus</h3>
+<p>Puede que estés comenzando con Stylus pero en tu proyecto ya tengas creado el CSS y quieras convertirlo. Stylus incorpora una utilidad para poder hacerlo de forma sencilla:</p>
+<pre class="language-bash"><code class="language-bash">stylus <span class="token parameter variable">-css</span> archivo.css</code></pre>
+<p>En lugar de indicarle un archivo con estensión <code>.styl</code>, le indicamos un <code>.css</code>. Esto nos generará el archivo <code>.styl</code> con la sintaxis de Stylus.</p>
+<p>Sin embargo, aunque usemos esta opción tendremos que editar el archivo a mano si queremos comenzar a añadir variables, funciones, etc. Mi recomendación es crear los nuevos proyectos con Stylus desde cero. Si ya tienes un proyecto antiguo con CSS, continúa con ello, o aprovecha un rediseño para hacer el cambio a Stylus.</p>
+<h3>Plugins</h3>
+<p>Existen algunos plugins que implementan características adicionales a Stylus. Uno de ellos es Nib. Este plugin es una librería de mixins que pondrá los prefijos necesarios para las propiedades de CSS que lo necesiten. Hablaremos de él más tarde.</p>
+<p>Para importar esos plugins tendremos que incluir en nuestro archivo de Stylus la sentencia <code>@import</code>.</p>
+<p>Para usar plugins como Nib, debemos indicar en la consola que estamos usando el plugin:</p>
+<pre class="language-bash"><code class="language-bash">stylus estilos.styl <span class="token parameter variable">--use</span> nib</code></pre>
+<p>Y debemos importarlo en nuestro archivo de Stylus <code>estilos.styl</code>:</p>
+<pre class="language-css"><code class="language-css">@import <span class="token string">'nib'</span>
+
+<span class="token comment">/* Código de Stylus */</span></code></pre>
+<h2>Stylus y Gulp</h2>
+<p><a href="http://gulpjs.com/">Gulp</a> es una utilidad que <strong>nos pemite automatizar tareas</strong> y ejecutarlas en cola. Podemos configurar Gulp para mantener ejecutado Stylus, levantar un servidor y actualizar el navegador cada vez que hagamos cambios en nuestros archivos. Es muy útil. Solo tenemos que configurarlo una vez y no necesitamos saber qué comando ejecutar en cada proyecto. Porque cada proyecto puede tener rutas distintas o usar diferentes plugins. Esta es una forma eficaz de organizar los ejecutables de nuestro proyecto.</p>
+<p>En lugar de Gulp puedes usar <a href="http://gruntjs.com/">Grunt</a>. Ambos hacen lo mismo, solo que tienen una forma diferente de trabajar.</p>
+<p>Trataré el tema de Gulp en un artículo aparte de este tutorial.</p>
+<h2>Programas con interfaz gráfica para Stylus</h2>
+<p>Si te sientes más a gusto utilizando aplicaciones con interfaz gráfica, hay algunas que pueden procesar archivos de Stylus:</p>
+<ul>
+<li><a href="https://incident57.com/codekit/">Codekit</a> - Mac</li>
+<li><a href="http://alphapixels.com/prepros/">Prepros</a> - Windows y Mac</li>
+<li><a href="http://mixture.io/">Mixture</a> - Windows y Mac</li>
+<li><a href="http://siteflow.witiz.com/">SiteFlow</a> - Mac</li>
+</ul>
+<p>Todas estas aplicaciones incorporan varios preprocesadores. Stylus es uno de ellos, pero también se puede usar con Less o Sass, u otros preprocesadores de HTML (Jade, Haml) o Javascript (Coffescript), además de múltiples funcionalidades interesantes, como compresión o detección de errores.</p>
+<p>Lo que se puede hacer con ellos es similar a lo que se podría con Gulp o Grunt, solo que bajo una interfaz gráfica. Lo único que hay que hacer es decirle el directorio de nuestro proyecto y configurar la aplicación.</p>
+<hr>
+<p>En el siguiente artículo verás <a href="/tutorial-de-stylus-sintaxis-anidacion-comentarios-variables-y-operadores/">la sintaxis, anidación, comentarios, variables y operadores de Stylus</a>. Puedes dejar un comentario contando qué te ha parecido hasta ahora. Tu <em>feedback</em> es importante.</p>
+
+		</section>
+	</article>
+</main>
+
+
+	<footer class="Footer site-footer clearfix">
+		<p>&copy; 2014 - 2023</p>
+	</footer>
+
+	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1"
+		xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<symbol id="icon-twitter" viewBox="0 0 24 28">
+				<title>twitter</title>
+				<path class="path1"
+					d="M20 9.531q-0.875 0.391-1.891 0.531 1.062-0.625 1.453-1.828-1.016 0.594-2.094 0.797-0.953-1.031-2.391-1.031-1.359 0-2.32 0.961t-0.961 2.32q0 0.453 0.078 0.75-2.016-0.109-3.781-1.016t-3-2.422q-0.453 0.781-0.453 1.656 0 1.781 1.422 2.734-0.734-0.016-1.563-0.406v0.031q0 1.172 0.781 2.086t1.922 1.133q-0.453 0.125-0.797 0.125-0.203 0-0.609-0.063 0.328 0.984 1.164 1.625t1.898 0.656q-1.813 1.406-4.078 1.406-0.406 0-0.781-0.047 2.312 1.469 5.031 1.469 1.75 0 3.281-0.555t2.625-1.484 1.883-2.141 1.172-2.531 0.383-2.633q0-0.281-0.016-0.422 0.984-0.703 1.641-1.703zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-linkedin" viewBox="0 0 24 28">
+				<title>linkedin</title>
+				<path class="path1"
+					d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906q-0.016-0.812-0.562-1.344t-1.453-0.531-1.477 0.531-0.57 1.344q0 0.797 0.555 1.336t1.445 0.539h0.016q0.922 0 1.484-0.539t0.562-1.336zM16.688 22.094h3.609v-6.219q0-2.406-1.141-3.641t-3.016-1.234q-2.125 0-3.266 1.828h0.031v-1.578h-3.609q0.047 1.031 0 10.844h3.609v-6.062q0-0.594 0.109-0.875 0.234-0.547 0.703-0.93t1.156-0.383q1.813 0 1.813 2.453v5.797zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-github" viewBox="0 0 24 28">
+				<title>github</title>
+				<path class="path1"
+					d="M6.156 21.125q-0.125 0.141-0.313-0.047-0.203-0.172-0.063-0.297 0.125-0.141 0.313 0.047 0.187 0.172 0.063 0.297zM5.5 20.172q0.141 0.187 0 0.297-0.125 0.094-0.266-0.109t0-0.281q0.141-0.109 0.266 0.094zM4.547 19.234q-0.078 0.109-0.203 0.031-0.156-0.078-0.109-0.187 0.047-0.078 0.203-0.031 0.156 0.078 0.109 0.187zM5.031 19.766q-0.094 0.109-0.25-0.047-0.141-0.172-0.031-0.25 0.094-0.094 0.25 0.047 0.141 0.172 0.031 0.25zM7.047 21.516q-0.063 0.187-0.297 0.094-0.266-0.063-0.203-0.234t0.297-0.109q0.25 0.078 0.203 0.25zM8.031 21.594q0 0.172-0.25 0.172-0.266 0.031-0.266-0.172 0-0.172 0.25-0.172 0.266-0.031 0.266 0.172zM8.937 21.438q0.031 0.156-0.219 0.219t-0.281-0.125 0.219-0.234q0.25-0.031 0.281 0.141zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-3.5q-0.25 0-0.383-0.016t-0.305-0.078-0.25-0.227-0.078-0.43v-3.734q0-1.516-0.812-2.219 0.891-0.094 1.602-0.281t1.469-0.609 1.266-1.039 0.828-1.641 0.32-2.352q0-1.891-1.234-3.219 0.578-1.422-0.125-3.187-0.438-0.141-1.266 0.172t-1.437 0.688l-0.594 0.375q-1.453-0.406-3-0.406t-3 0.406q-0.25-0.172-0.664-0.422t-1.305-0.602-1.344-0.211q-0.688 1.766-0.109 3.187-1.234 1.328-1.234 3.219 0 1.328 0.32 2.344t0.82 1.641 1.258 1.047 1.469 0.609 1.602 0.281q-0.625 0.562-0.766 1.609-0.328 0.156-0.703 0.234t-0.891 0.078-1.023-0.336-0.867-0.977q-0.297-0.5-0.758-0.812t-0.773-0.375l-0.313-0.047q-0.328 0-0.453 0.070t-0.078 0.18 0.141 0.219 0.203 0.187l0.109 0.078q0.344 0.156 0.68 0.594t0.492 0.797l0.156 0.359q0.203 0.594 0.688 0.961t1.047 0.469 1.086 0.109 0.867-0.055l0.359-0.063q0 0.594 0.008 1.609t0.008 1.062q0 0.344-0.172 0.523t-0.344 0.203-0.516 0.023h-3.5q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+		</defs>
+	</svg>
+</body>
+
+</html>

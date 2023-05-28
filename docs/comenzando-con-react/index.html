@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>Comenzando con React</title>
+	<meta name="description" content="Blog sobre desarrollo de software" />
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="/blog.css">
+	<link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+	<link rel="alternate" href="." type="application/atom+xml" title="Iván Abascal Lozano">
+
+	<meta property="og:site_name" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:description" content="Blog sobre desarrollo de software" />
+	<meta property="og:url" content="https://abalozz.es/" />
+	<meta property="og:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta name="twitter:description" content="Blog sobre desarrollo de software" />
+	<meta name="twitter:url" content="https://abalozz.es/" />
+	<meta name="twitter:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:site" content="@nuzkito" />
+	<meta property="og:image:width" content="3200" />
+	<meta property="og:image:height" content="2368" />
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"publisher": {
+			"@type": "Organization",
+			"name": "Iván Abascal Lozano - Desarrollador de software",
+			"url": "https://abalozz.es/",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://abalozz.es/favicon.ico",
+				"width": 60,
+				"height": 60
+			}
+		},
+		"url": "https://abalozz.es/",
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://abalozz.es/images/2015/02/cover-o-1.jpg",
+			"width": 3200,
+			"height": 2368
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://abalozz.es/"
+		},
+		"description": "Blog sobre desarrollo de software"
+	}
+	</script>
+</head>
+
+<body>
+	<header class="Header">
+		<a href="/" class="main-link">
+			<h1 class="name">Iván Abascal Lozano</h1>
+			<p class="job">Desarrollador de software</p>
+		</a>
+		<div class="social-links">
+			<a class="social-link" target="_blank" href="https://twitter.com/nuzkito">
+				<svg class="icon icon-twitter">
+					<use xlink:href="#icon-twitter"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://github.com/abalozz">
+				<svg class="icon icon-github">
+					<use xlink:href="#icon-github"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://www.linkedin.com/in/abalozz/">
+				<svg class="icon icon-linkedin">
+					<use xlink:href="#icon-linkedin"></use>
+				</svg>
+			</a>
+		</div>
+	</header>
+
+	
+<main class="Content" role="main">
+	<article class="Post">
+		<header class="Post-header">
+				<h1 class="Post-title">Comenzando con React</h1>
+			<section class="Post-meta">
+				<time class="Post-date" datetime="2015-04-30T22:10:09.000Z">30 de abril de 2015</time>
+				<span class="Post-readingTime">
+					14 minutos de lectura
+				</span>
+				<div class="Post-tags"><a href="/tag/JavaScript">JavaScript</a><a href="/tag/Tutorial">Tutorial</a><a href="/tag/React">React</a></div>
+			</section>
+		</header>
+		<section class="Post-content">
+			<p><a href="https://facebook.github.io/react/">React es una librería de Javascript</a> creada por los desarrolladores de Facebook para <strong>construir interfaces de usuario de forma modular</strong>. Su principal característica es su capacidad para hacer cambios en el DOM de la página de una forma muy eficiente.</p>
+<p>Puedes encontrar su documentación en https://facebook.github.io/react/</p>
+<h2>Cómo funciona React</h2>
+<p>React hace uso de un <strong>DOM virtual</strong>. No trabaja directamente con el DOM, sino con una copia en memoria. Cuando una acción hace un cambio en la página, React regenera ese DOM virtual, lo compara con el DOM real, y hace únicamente los cambios necesarios en el DOM para que sea igual a la copia virtual. Esto, aunque no lo parezca, <strong>es más rápido que trabajar directamente con el DOM</strong>.</p>
+<p>A diferencia de lo que se suele hacer actualmente en los desarrollos no maneja plantillas de HTML, sino que crea los nodos directamente con Javascript.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">React.render(
+  React.createElement('h1', null, 'Hello, world!'),
+  document.getElementById('example')
+);</code></pre>
+<p>Para simplificar la creación del HTML se puede usar JSX, <a href="https://facebook.github.io/jsx/">una sintaxis alternativa similar a XML</a>, que se convertirá a Javascript para que el navegador lo entienda.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">React.render(
+  <h1>Hello, world!</h1>,
+  document.getElementById('example')
+);</code></pre>
+<p>Está orientado a un desarrollo totalmente <strong>modular</strong>, donde <strong>cada elemento de la interfaz es un componente distinto</strong>. Si tenemos una lista de elementos, la lista sería un componente, y cada elemento sería otro componente distinto. Esos elementos podrían tener más componentes dentro (un temporizador, un contador, etc.).</p>
+<h2>Creando un chat con React</h2>
+<p>Para ilustrar React he hecho este pequeño tutorial que muestra cómo programar la interfaz de un chat simple usando React. Para que puedas centrarte en el tutorial, podrás encontrar en <a href="https://github.com/abalozz/react-chat">este repositorio de GitHub</a> el código necesario para el servidor y los estilos. Además podrás seguir los pasos realizados mediante las <em>tags</em>. Cada <em>tag</em> es un paso del tutorial.</p>
+<blockquote>
+<p><em>Editado el 12 de marzo de 2016:</em>
+Actualmente se recomienda <a href="/usa-las-nuevas-caracteristicas-de-javascript-hoy-mismo-con-babel/">usar Babel</a> para transformar el código JSX. El componente para transformar JSX está obsoleto y no será actualizado.</p>
+</blockquote>
+<h3>Preparando el HTML inicial</h3>
+<p>Para instalar React, puedes <a href="https://facebook.github.io/react/downloads.html">descargarlo desde su sitio</a> o instalarlo mediante gestores como <a href="https://www.npmjs.com/">npm</a> o <a href="http://bower.io/">Bower</a>. Por simplicidad, en este tutorial usaremos un CDN. También incluiremos la librería <a href="http://momentjs.com/">Moment</a>, para manejo de fechas, y <a href="http://socket.io/">Socket.io</a>, para la comunicación a tiempo real.</p>
+<pre class="language-language-markup"><code class="language-language-markup"><!-- tag 01 -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with React</title>
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css">
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+
+  <div id="chat">
+    
+  </div>
+
+  <!-- Scripts externos -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/react.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.1/JSXTransformer.js"></script>
+  <script src="http://momentjs.com/downloads/moment.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- Scripts de nuestra aplicación -->
+  <script src="/app.js"></script>
+  <script src="/chat.jsx" type="text/jsx"></script>
+</body>
+</html></code></pre>
+<p>Este será el <code>index.html</code>. Observa que hay un archivo llamado <code>JSXTransformer.js</code>. Este archivo se encargará de transformar JSX a Javascript real. Esto no es recomendado en producción. Al terminar veremos cómo procesar el JSX antes de subir el código a producción.</p>
+<p>Para que JSXTransformer funcione, debemos indicar a nuestro archivo que tenga extensión <code>.jsx</code> y que sea de tipo <code>text/jsx</code>.</p>
+<p>El el archivo <code>app.js</code> se inicia Socket.io. El código para el chat lo crearemos en <code>chat.jsx</code>.</p>
+<h3>De HTML a componentes de React</h3>
+<p>Lo más sencillo para crear los componentes de la aplicación es comenzar con un prototipo en HTML que nos permita ver cómo están estructurados los elementos.</p>
+<pre class="language-language-markup"><code class="language-language-markup"><!-- tag 02 -->
+<div id="chat">
+  <div class="chat-box">
+    <h1 class="title">Chat con ReactJS</h1>
+    <ul class="message-list">
+      <li class="message">
+        <strong>Usuario:</strong> Mensaje enviado <small class="time-ago">hace dos minutos</small>
+      </li>
+      <li class="message">
+        <strong>Usuario:</strong> Mensaje enviado <small class="time-ago">hace dos minutos</small>
+      </li>
+      <li class="message">
+        <strong>Usuario:</strong> Mensaje enviado <small class="time-ago">hace dos minutos</small>
+      </li>
+    </ul>
+    <form class="chat-form">
+      <input class="input username-input" type="text" placeholder="Nombre de usuario">
+      <input class="input body-input" type="text" placeholder="¡Escribe algo! :D">
+      <button class="button">Enviar</button>
+    </form>
+  </div>
+</div></code></pre>
+<p>Tenemos un contenedor principal <code>div#chat</code> que contendrá el HTML del chat. Dentro hay un <code>div.chat-box</code>. Ese será el componente principal del chat, del cual dependerán los demás. Dentro tenemos otros dos elementos principales, una lista con los mensajes <code>ul.message-list</code>, y un formulario <code>form.chat-form</code>. Y dentro de la lista de mensajes, cada mensaje será un componente independiente.</p>
+<p>Si vamos disgregando el HTML nos queda un árbol así:</p>
+<ul>
+<li>Chat
+<ul>
+<li>Lista de mensajes
+<ul>
+<li>Mensaje</li>
+</ul>
+</li>
+<li>Formulario</li>
+</ul>
+</li>
+</ul>
+<p>Lo ideal es que cada componente cumpla una única función, manteniéndolos lo más pequeños posibles. Podríamos hacer que la lista de mensajes se encargue de todas las tareas relacionadas con los mensajes, pero si lo descomponemos podremos separar nuestro código y hacerlo más reutilizable.</p>
+<p>Y se puede modularizar más. Fijémonos un momento en la etiqueta <code>small.time-ago</code>. Se usará para mostrar el tiempo que pasó desde que se envió el mensaje. Ese tiempo además se actualizará automáticamente. Podemos separarlo en un componente independiente que únicamente se encargue de mostrar hace cuánto fue enviado el mensaje. Además, siendo un componente, podemos reutilizarlo, por ejemplo en un sistema de comentarios.</p>
+<p>El árbol de componentes y la función de cada uno sería el siguiente:</p>
+<ul>
+<li>Chat: Se comunica con el servidor y envía los nuevos mensajes al listado de mensajes.
+<ul>
+<li>Lista de mensajes: Itera los mensajes para mostrarlos.
+<ul>
+<li>Mensaje: Muestra el contenido del mensaje.
+<ul>
+<li>Indicador de tiempo: Muestra hace cuánto se envió el mensaje.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Formulario: Permite enviar nuevos mensajes.</li>
+</ul>
+</li>
+</ul>
+<p>Y ahora que sabemos qué componentes formarán el chat, creemos los componentes con React.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">// tag 04
+var TimeAgo = React.createClass({
+
+  render: function () {
+    return (
+      <small className="time-ago">hace dos minutos</small>
+    );
+  }
+
+});</code></pre>
+<p>Para crear un componente de React debemos usar el método <code>createClass</code>, al cual le pasaremos un objeto con los métodos que tendrá el componente. Todos los componentes deben tener obligatoriamente el método <code>render</code>. Este método se encargará <em>dibujar</em> el elemento en la página. Debe devolver un nodo del DOM, por lo que siempre debemos devolver un solo elemento. En este caso, devolvemos un único elemento <code>&lt;small&gt;</code>. Si tuviesemos varios elementos, se deben englobar dentro de uno solo.</p>
+<p>Dentro de un componente podemos incluir otros como si fueran otra etiqueta más de HTML.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">// tag 04
+var Message = React.createClass({
+
+  render: function () {
+    return (
+      <li className="message"><strong>Usuario:</strong> Mensaje <TimeAgo>hace dos minutos</TimeAgo></li>
+    );
+  },
+
+});</code></pre>
+<p>Dentro del componente del mensaje incluimos una etiqueta <code>TimeAgo</code>, que es como hemos llamado al componente que va a mostrar hace cuanto se envió el mensaje. Es como crear nuestras propias etiquetas.</p>
+<blockquote>
+<p>Para diferencias los componentes de React de las etiquetas de HTML, los componentes deben empezar por mayúscula.</p>
+</blockquote>
+<p>Así podemos ir creando el resto de componentes. El resultado final sería el siguiente:</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">// Contenedor del chat
+var ChatBox = React.createClass({
+
+  render: function () {
+    return (
+      <div className="chat-box">
+        <h1 className="title">Chat con ReactJS</h1>
+        <MessageList />
+        <ChatForm />
+      </div>
+    );
+  },
+
+});
+
+// Formulario para enviar mensajes
+var ChatForm = React.createClass({
+
+  render: function () {
+    return (
+      <form className="chat-form">
+        <input className="input username-input" type="text" placeholder="Nombre de usuario" />
+        <input className="input body-input" type="text" placeholder="¡Escribe algo! :D" />
+        <button className="button">Enviar</button>
+      </form>
+    );
+  },
+
+});
+
+// Listado de mensajes
+var MessageList = React.createClass({
+
+  render: function () {
+    return (
+      <ul className="message-list">
+        <Message />
+        <Message />
+        <Message />
+      </ul>
+    );
+  },
+
+});
+
+// Cada mensaje individual
+var Message = React.createClass({
+
+  render: function () {
+    return (
+      <li className="message"><strong>Usuario:</strong> Mensaje <TimeAgo>hace dos minutos</TimeAgo></li>
+    );
+  },
+
+});
+
+// ¿Hace cuanto se envió el mensaje?
+var TimeAgo = React.createClass({
+
+  render: function () {
+    return (
+      <small className="time-ago">hace dos minutos</small>
+    );
+  }
+
+});
+
+
+// Iniciar chat
+React.render(<ChatBox />, document.getElementById('chat'));</code></pre>
+<p>La última línea es la que iniciará la aplicación. A <code>React.render</code> le pasamos el componente principal de la aplicación, y el elemento en el que queramos que se inserte, en este caso el <code>div#chat</code>.</p>
+<p>Si ejecutas el código ahora, debe mostrarte 3 mensajes.</p>
+<blockquote>
+<p>Si te has fijado, en lugar de usar el atributo <code>class</code> para definir las clases de CSS, se usa <code>className</code>. También ocurre con el atributo <code>for</code>, que debemos ponerlo como <code>htmlFor</code>. Esto es debido a que <code>class</code> y <code>for</code> son palabras reservadas.</p>
+</blockquote>
+<h3>Propiedades (<em>props</em>) de los componentes.</h3>
+<p>Tenemos varios componentes, pero son totalmente estáticos. Lo normal es que los componentes reciban datos y hagan algo con ellos. En el componente <code>ChatBox</code> vamos a definir un array con varios mensajes que le pasaremos al componente <code>MessageList</code> para que los muestre.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">// tag 05
+var ChatBox = React.createClass({
+
+  render: function () {
+
+    var messageList = [
+      {
+        id: 1,
+        username: 'Usuario',
+        body: 'Contenido del mensaje',
+        time: new Date(),
+      },
+      {
+        id: 2,
+        username: 'Usuario',
+        body: 'Contenido del mensaje',
+        time: new Date(),
+      },
+      {
+        id: 3,
+        username: 'Usuario',
+        body: 'Contenido del mensaje',
+        time: new Date(),
+      },
+    ];
+
+    return (
+      <div className="chat-box">
+        <h1 className="title">Chat con ReactJS</h1>
+        <MessageList messageList={messageList} />
+        <ChatForm />
+      </div>
+    );
+  },
+
+});</code></pre>
+<p>A <code>MessageList</code> le añadimos un atributo para pasarle los mensajes. Así es como se pasan datos entre los componentes.</p>
+<blockquote>
+<p>Para usar variables dentro del JSX debemos ponerlas entre llaves <code>{}</code> en lugar de entre comillas <code>&quot;&quot;</code>. Todo lo que pongamos entre llaves se ejecutará como Javascript, por lo que también podemos usar funciones.</p>
+</blockquote>
+<p>Los atributos se reciben como propiedades (<em>props</em>) del componente. Las propiedades se consideran datos inmutables del componente. Es decir, no se pueden cambiar. Pueden ser accedidas desde <code>this.props</code>.</p>
+<p>Dentro de <code>MessageList</code> podemos acceder al array de mensajes con <code>this.props.messageList</code>. Como queremos mostrar el listado de mensajes, haremos un bucle que genera todos los componentes <code>Message</code> necesarios usando el método <code>map</code>.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">// tag 05
+var MessageList = React.createClass({
+
+  render: function () {
+    var messageList = this.props.messageList.map(function (message) {
+      return (
+        <Message name={message.username} time={message.time}>{message.body}</Message>
+      );
+    });
+
+    return (
+      <ul className="message-list">
+        {messageList}
+      </ul>
+    );
+  },
+
+});</code></pre>
+<p>A Message, a su vez, le pasamos más atributos. En este caso, <code>message.body</code> no se está enviando como atributo, sino como hijo. Podemos pasar texto o elementos a los componentes, que podrán ser accedidos desde <code>this.props.children</code>.</p>
+<p>Los otros componentes son iguales. Recogen datos de las props y se pasan a los subcomponentes.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">// tag 05
+var Message = React.createClass({
+
+  render: function () {
+    return (
+      <li className="message"><strong>{this.props.name}:</strong> {this.props.children} <TimeAgo>{this.props.time}</TimeAgo></li>
+    );
+  },
+
+});
+
+var TimeAgo = React.createClass({
+
+  render: function () {
+    return (
+      <small className="time-ago">{moment(this.props.children).fromNow()}</small>
+    );
+  }
+
+});</code></pre>
+<p>Si ejecutas el código ahora, el resultado debe ser el mismo que antes. Solo que si ahora modificas los datos del array, podrás ver cómo se modifican los datos mostrados.</p>
+<h3>Enviando mensajes</h3>
+<p>Los componentes ya no son estáticos, pero no tenemos forma de enviarles nuevos datos. Vamos a ver cómo podemos agregar mensajes al chat.</p>
+<p>Agregaremos los mensajes desde el componente de formulario <code>ChatForm</code>, pero tenemos que llevarlos hasta <code>MessageList</code>. Para eso, los mensajes deben pasar antes por <code>ChatBox</code>. Pero React es unidireccional. Podemos enviar datos a los subcomponentes pasándoselos como atributo, pero no podemos hacer lo contrario. Para poder enviar los mensajes a <code>ChatBox</code> debemos usar eventos.</p>
+<p>No es más que pasarle una función al subcomponente, que la ejecutará cuando sea necesario actualizar un dato, en este caso, enviar un mensaje. En <code>ChatBox</code> crearemos ese método, que enviará el mensaje a otro método que crearemos luego.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">// tag 06
+handleMessageSubmit: function (message) {
+  this.addNewMessage(message);
+},</code></pre>
+<p>Este método se lo pasamos a <code>ChatForm</code>:</p>
+<pre class="language-language-markup"><code class="language-language-markup"><ChatForm onMessageSubmit={this.handleMessageSubmit} /></code></pre>
+<p>Y así lo podremos acceder desde <code>this.props.onMessageSubmit()</code>.</p>
+<p>En <code>ChatForm</code> necesitamos crear una función que se ejecute cuando se envíe el formulario. Esto se puede hacer agregando un evento <em>submit</em>.
+Para usar eventos nativos de Javascript sobre elementos de HTML solo hay que poner el nombre del evento comenzando en mayúscula precedido de <em>on</em> (<em>onClick</em>, <em>onSubmit</em>, etc.).</p>
+<p>Al recoger datos de formulario, primero debemos obtener el elemento del cual queremos obtener un dato. Para ello, podemos identificarlos con el atributo <code>ref</code>, y para acceder a ellos usamos <code>this.refs</code>. Y para poder obtener el Nodo real del DOM (recordemos que React trabaja con un DOM virtual) puedes usar <code>React.findDOMNode</code>, o el método <code>getDOMNode</code> de las <code>refs</code> (<code>this.refs.username.getDOMNode()</code>).</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">var ChatForm = React.createClass({
+
+  render: function () {
+    return (
+      <form className="chat-form" onSubmit={this.handleSubmit}>
+        <input className="input username-input" type="text" placeholder="Nombre de usuario" ref="username" />
+        <input className="input body-input" type="text" placeholder="¡Escribe algo! :D" ref="body" />
+        <button className="button">Enviar</button>
+      </form>
+    );
+  },
+
+  handleSubmit: function (event) {
+    event.preventDefault();
+
+    var message = {
+      username: React.findDOMNode(this.refs.username).value.trim(),
+      body: React.findDOMNode(this.refs.body).value.trim(),
+    }
+
+    if (!message.username || !message.body) {
+      return;
+    }
+
+    this.props.onMessageSubmit(message);
+    React.findDOMNode(this.refs.body).value = '';
+  },
+
+});</code></pre>
+<p>Y tras validar el mensaje, se llama al método <code>onMessageSubmit</code> que definimos en <code>ChatBox</code>. Así es como hemos conseguido enviar el mensaje a <code>Chatbox</code>.</p>
+<p>En el método <code>addNewMessage</code> que definiremos en <code>ChatBox</code> agregaremos el mensaje al array de mensajes y actualizaremos los subcomponentes que sean necesarios para que se muestre el mensaje. Para hacer esto usaremos estados (<code>states</code>). Los estados nos permiten guardan información del componente, al igual que las propiedades. La diferencia es que los estados sí pueden ser modificados. Únicamente deben ser usados para datos que pueden variar dentro del componente, como es el caso de nuestra lista de mensajes.</p>
+<p>Los estados deben tener un valor inicial. La primera vez que se cargue el chat la lista de mensajes estará vacía, y para que no nos de error al tratar de acceder a la misma, debemos indicar que el estado inicial sea un <em>array</em> vacío. Eso lo haremos con el método <code>getInitialState</code>, que debe devolver un objeto con todos los estados iniciales del componente.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">getInitialState: function () {
+  return {
+    messageList: [],
+  }
+},</code></pre>
+<p>Para usar los estados los debemos acceder desde <code>this.states</code>, por lo que ahora le pasaremos los mensajes a <code>MessageList</code> de esta forma:</p>
+<pre class="language-language-markup"><code class="language-language-markup"><MessageList messageList={this.state.messageList} /></code></pre>
+<p>Si quieres, para probar que todo va funcionando correctamente puedes definir como estado inicial el array que habíamos declarado en el método <code>render</code>.</p>
+<p>Para finalizar, debemos actualizar el estado cuando enviamos un nuevo mensaje. Dentro del método <code>addNewMessage</code> llamaremos al método <code>setState</code>, pasándole un objeto con el estado que queremos cambiar. Este método se encargará de llamar al método <code>render</code> automáticamente para que se actualicen los subcomponentes y se muestre el mensaje.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">addNewMessage: function (message) {
+  var messageList = this.state.messageList;
+  if (messageList.length > 100) {
+    messageList.shift();
+  }
+  messageList.push(message);
+  this.setState({ messageList: messageList });
+},</code></pre>
+<p>En el código, además de añadir el mensaje, si tenemos más de 100 los vamos eliminando. Así evitamos acumular miles de mensajes.</p>
+<h3>Comunicación con el servidor</h3>
+<p>Ahora ya debes poder enviar mensajes. Pero aún no podemos hablar con otras personas, porque no se envían al servidor. Veamos cómo hacerlo.</p>
+<p>Para comunicarnos con el servidor usamos Socket.io. Ya tenemos una variable global llamada <code>socket</code>, que se inicia en el archivo <code>app.js</code>. En el servidor tenemos un evento <code>message</code> escuchando que recibirá los nuevos mensajes y los reenviará a los demás usuarios conectados.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">handleMessageSubmit: function (message) {
+  socket.emit('message', message);
+  this.addNewMessage(message);
+},</code></pre>
+<p>En otros proyectos, podrías usar AJAX sin ningún problema en este punto. La forma con la que envíes mensajes al servidor es independiente de React.</p>
+<p>Ya podemos enviar mensajes al servidor, pero aún no podemos recibirlos. Para ello, debemos escuchar 2 eventos del servidor. <code>messages</code> nos devolverá la lista de mensajes la primera vez que nos conectemos. <code>message</code> nos enviará los nuevos mensajes que envíen los demás usuarios. Esto esta definido en el archivo server.js que puedes encontrar el el repositorio. No forma parte de React, pero puedes echarle un vistazo.</p>
+<p>El código para escuchar esos eventos del servidor lo pondremos en el método <code>componentDidMount</code>. Este método se ejecuta automáticamente después de que el componente se cree, y solo se ejecutará una vez. Justo lo que queremos.</p>
+<pre class="language-language-javascript"><code class="language-language-javascript">componentDidMount: function () {
+  socket.once('messages', function (messages) {
+    this.setState({ messageList: messages });
+  }.bind(this));
+
+  socket.on('message', function (message) {
+    this.addNewMessage(message);
+  }.bind(this));
+},</code></pre>
+<p>Y al recibir los mensajes, lo que hacemos es llamar al método <code>setState</code> para actualizar el estado y que se dibujen los nuevos mensajes en pantalla.</p>
+<p>¡Y listo! Con esto ya tenemos un chat funcional creado con React. Pero aún quedan cosas por mejorar.</p>
+<h3>Convertir JSX a Javascript</h3>
+<p>Hasta ahora, para que funcione JSX hemos incluido el archivo <code>JSXTransformer.js</code>, que se encarga de que el JSX funcione en el navegador. Pero esto no es lo más óptimo para usar en producción. Lo que debes hacer es transformar el JSX en Javascript y llamar al fichero <code>.js</code> que se ha generado.</p>
+<p>Para generar el <code>.js</code> hay que instalar <a href="https://facebook.github.io/react/downloads.html#npm">react-tools</a> con <code>npm install react-tools -g</code>. Ahora tendremos disponible el comando <code>jsx</code> para transformar los ficheros <code>.jsx</code> a <code>.js</code>.</p>
+<pre class="language-language-bash"><code class="language-language-bash">jsx public/chat.jsx public/chat.js</code></pre>
+<p>Y en el HTML eliminamos la llamada a <code>JSXTransformer.js</code> y usamos <code>chat.js</code> en lugar de <code>chat.jsx</code>.</p>
+<pre class="language-language-markup"><code class="language-language-markup"><script src="/chat.js"></script></code></pre>
+<p>Y ahora sí, el chat ya está terminado :D</p>
+<hr>
+<p>Me he saltado el <em>tag 09</em> del repositorio. Ese paso es para lograr que el tiempo de los mensajes se actualice automáticamente. Puedes ver cómo hacerlo en <a href="/reutiliza-tu-codigo-en-react-usando-mixins">el siguiente artículo</a> y <a href="https://github.com/abalozz/react-chat/tree/09">en GitHub</a> :)</p>
+<h2>¿Qué te ha parecido?</h2>
+<p>Cuéntame qué te ha parecido este artículo-tutorial y qué te parece React. ¿Lo usarás en algún proyecto? :)</p>
+<p>Y no te olvides, comparte el <em>post</em> con tus amigos, en redes sociales, etc. :)</p>
+
+		</section>
+	</article>
+</main>
+
+
+	<footer class="Footer site-footer clearfix">
+		<p>&copy; 2014 - 2023</p>
+	</footer>
+
+	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1"
+		xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<symbol id="icon-twitter" viewBox="0 0 24 28">
+				<title>twitter</title>
+				<path class="path1"
+					d="M20 9.531q-0.875 0.391-1.891 0.531 1.062-0.625 1.453-1.828-1.016 0.594-2.094 0.797-0.953-1.031-2.391-1.031-1.359 0-2.32 0.961t-0.961 2.32q0 0.453 0.078 0.75-2.016-0.109-3.781-1.016t-3-2.422q-0.453 0.781-0.453 1.656 0 1.781 1.422 2.734-0.734-0.016-1.563-0.406v0.031q0 1.172 0.781 2.086t1.922 1.133q-0.453 0.125-0.797 0.125-0.203 0-0.609-0.063 0.328 0.984 1.164 1.625t1.898 0.656q-1.813 1.406-4.078 1.406-0.406 0-0.781-0.047 2.312 1.469 5.031 1.469 1.75 0 3.281-0.555t2.625-1.484 1.883-2.141 1.172-2.531 0.383-2.633q0-0.281-0.016-0.422 0.984-0.703 1.641-1.703zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-linkedin" viewBox="0 0 24 28">
+				<title>linkedin</title>
+				<path class="path1"
+					d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906q-0.016-0.812-0.562-1.344t-1.453-0.531-1.477 0.531-0.57 1.344q0 0.797 0.555 1.336t1.445 0.539h0.016q0.922 0 1.484-0.539t0.562-1.336zM16.688 22.094h3.609v-6.219q0-2.406-1.141-3.641t-3.016-1.234q-2.125 0-3.266 1.828h0.031v-1.578h-3.609q0.047 1.031 0 10.844h3.609v-6.062q0-0.594 0.109-0.875 0.234-0.547 0.703-0.93t1.156-0.383q1.813 0 1.813 2.453v5.797zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-github" viewBox="0 0 24 28">
+				<title>github</title>
+				<path class="path1"
+					d="M6.156 21.125q-0.125 0.141-0.313-0.047-0.203-0.172-0.063-0.297 0.125-0.141 0.313 0.047 0.187 0.172 0.063 0.297zM5.5 20.172q0.141 0.187 0 0.297-0.125 0.094-0.266-0.109t0-0.281q0.141-0.109 0.266 0.094zM4.547 19.234q-0.078 0.109-0.203 0.031-0.156-0.078-0.109-0.187 0.047-0.078 0.203-0.031 0.156 0.078 0.109 0.187zM5.031 19.766q-0.094 0.109-0.25-0.047-0.141-0.172-0.031-0.25 0.094-0.094 0.25 0.047 0.141 0.172 0.031 0.25zM7.047 21.516q-0.063 0.187-0.297 0.094-0.266-0.063-0.203-0.234t0.297-0.109q0.25 0.078 0.203 0.25zM8.031 21.594q0 0.172-0.25 0.172-0.266 0.031-0.266-0.172 0-0.172 0.25-0.172 0.266-0.031 0.266 0.172zM8.937 21.438q0.031 0.156-0.219 0.219t-0.281-0.125 0.219-0.234q0.25-0.031 0.281 0.141zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-3.5q-0.25 0-0.383-0.016t-0.305-0.078-0.25-0.227-0.078-0.43v-3.734q0-1.516-0.812-2.219 0.891-0.094 1.602-0.281t1.469-0.609 1.266-1.039 0.828-1.641 0.32-2.352q0-1.891-1.234-3.219 0.578-1.422-0.125-3.187-0.438-0.141-1.266 0.172t-1.437 0.688l-0.594 0.375q-1.453-0.406-3-0.406t-3 0.406q-0.25-0.172-0.664-0.422t-1.305-0.602-1.344-0.211q-0.688 1.766-0.109 3.187-1.234 1.328-1.234 3.219 0 1.328 0.32 2.344t0.82 1.641 1.258 1.047 1.469 0.609 1.602 0.281q-0.625 0.562-0.766 1.609-0.328 0.156-0.703 0.234t-0.891 0.078-1.023-0.336-0.867-0.977q-0.297-0.5-0.758-0.812t-0.773-0.375l-0.313-0.047q-0.328 0-0.453 0.070t-0.078 0.18 0.141 0.219 0.203 0.187l0.109 0.078q0.344 0.156 0.68 0.594t0.492 0.797l0.156 0.359q0.203 0.594 0.688 0.961t1.047 0.469 1.086 0.109 0.867-0.055l0.359-0.063q0 0.594 0.008 1.609t0.008 1.062q0 0.344-0.172 0.523t-0.344 0.203-0.516 0.023h-3.5q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+		</defs>
+	</svg>
+</body>
+
+</html>

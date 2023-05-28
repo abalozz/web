@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>¡Separa los controladores!</title>
+	<meta name="description" content="Blog sobre desarrollo de software" />
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="/blog.css">
+	<link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+	<link rel="alternate" href="." type="application/atom+xml" title="Iván Abascal Lozano">
+
+	<meta property="og:site_name" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:description" content="Blog sobre desarrollo de software" />
+	<meta property="og:url" content="https://abalozz.es/" />
+	<meta property="og:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta name="twitter:description" content="Blog sobre desarrollo de software" />
+	<meta name="twitter:url" content="https://abalozz.es/" />
+	<meta name="twitter:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:site" content="@nuzkito" />
+	<meta property="og:image:width" content="3200" />
+	<meta property="og:image:height" content="2368" />
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"publisher": {
+			"@type": "Organization",
+			"name": "Iván Abascal Lozano - Desarrollador de software",
+			"url": "https://abalozz.es/",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://abalozz.es/favicon.ico",
+				"width": 60,
+				"height": 60
+			}
+		},
+		"url": "https://abalozz.es/",
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://abalozz.es/images/2015/02/cover-o-1.jpg",
+			"width": 3200,
+			"height": 2368
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://abalozz.es/"
+		},
+		"description": "Blog sobre desarrollo de software"
+	}
+	</script>
+</head>
+
+<body>
+	<header class="Header">
+		<a href="/" class="main-link">
+			<h1 class="name">Iván Abascal Lozano</h1>
+			<p class="job">Desarrollador de software</p>
+		</a>
+		<div class="social-links">
+			<a class="social-link" target="_blank" href="https://twitter.com/nuzkito">
+				<svg class="icon icon-twitter">
+					<use xlink:href="#icon-twitter"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://github.com/abalozz">
+				<svg class="icon icon-github">
+					<use xlink:href="#icon-github"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://www.linkedin.com/in/abalozz/">
+				<svg class="icon icon-linkedin">
+					<use xlink:href="#icon-linkedin"></use>
+				</svg>
+			</a>
+		</div>
+	</header>
+
+	
+<main class="Content" role="main">
+	<article class="Post">
+		<header class="Post-header">
+				<div
+					class="Post-cover"
+					style="background-image:
+						url(https://images.unsplash.com/photo-1494412685616-a5d310fbb07d?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjExNzczfQ);">
+					<h1 class="Post-titleCovered">¡Separa los controladores!</h1>
+				</div>
+			<section class="Post-meta">
+				<time class="Post-date" datetime="2019-08-13T18:08:00.000Z">13 de agosto de 2019</time>
+				<span class="Post-readingTime">
+					4 minutos de lectura
+				</span>
+				<div class="Post-tags"><a href="/tag/Arquitectura de software">Arquitectura de software</a></div>
+			</section>
+		</header>
+		<section class="Post-content">
+			<p>Lo que veo más habitual al trabajar en una aplicación web, principalmente en el caso del backend, es que los puntos de entrada de la aplicación se organicen en controladores, y que cada controlador agrupe los métodos relacionados con una entidad en concreto.</p>
+<p>Por ejemplo, teniendo una entidad <em>Post</em> en la aplicación, se suele crear un <em>PostController</em> con los correspondientes métodos para listar, ver, crear, editar y eliminar los artículos. Es decir, las acciones del típico CRUD.</p>
+<pre class="language-text"><code class="language-text">PostController
+	index
+	show
+	create
+	update
+	delete</code></pre>
+<p>Si además la aplicación también genera el HTML, serán necesarios como mínimo un par de métodos más para mostrar los formularios de edición y creación.</p>
+<pre class="language-text"><code class="language-text">PostController
+	index
+	show
+	create
+	store
+	edit
+	update
+	delete</code></pre>
+<p>‌Pero, ¿qué pasa si también se necesita poder votar artículos o guardarlos como favoritos? Posiblemente acaben en el mismo controlador, porque son acciones que se realizan sobre el artículo... ¿no?</p>
+<pre class="language-text"><code class="language-text">PostController
+	index
+	show
+	create
+	store
+	edit
+	update
+	delete
+	vote
+	unvote
+	fav
+	unfav</code></pre>
+<p>Con las acciones para añadir y eliminar votos y favoritos, el PostController ya tiene 11 métodos. Si más adelante hay que añadir nuevas funcionalidades, es posible que se junten aquí, y el controlador empiece a crecer desmesuradamente ganando líneas y líneas. Por lo general, como desarrolladores queremos que nuestras clases no tengan demasiadas líneas para que sea más fácil leer el código, por lo que voy a explicar cómo se puede mejorar.</p>
+<p>Un primer paso es tratar los votos y los favoritos como entidades. Posiblemente sean una relación muchos a muchos entre la entidad de usuarios y la de artículos, por lo que estas nuevas entidades serían un equivalente a las tablas pivote mediante las que se relacionan.</p>
+<p>Teniendo dichas entidades, usando el patrón de un controlador por entidad, ahora existiría lo siguiente.</p>
+<pre class="language-text"><code class="language-text">PostController
+	index
+	show
+	create
+	store
+	edit
+	update
+	delete
+
+VoteController
+	store
+	delete
+
+FavController
+	store
+	delete</code></pre>
+<p>‌Si ahora hubiese que añadir una funcionalidad para comentar un artículo, se puede crear un controlador de comentarios, a pesar de que la acción comentar se realice sobre un artículo, y a pesar de que la ruta pueda ser <em>POST /posts/7/comments</em>. Así se libera al controlador de artículos de tanta carga. Además, de esta forma es posible mantener los métodos típicos utilizados en un CRUD.</p>
+<p>Ahora vamos a ir un poco más allá. Al crear un artículo este no va a ser publicado de inmediato, sino que estará en borrador para poder ampliarlo y hacer correcciones antes de publicarlo. Por lo que será necesario añadir otra acción... pero las de crear y actualizar ya están pilladas, ¿qué se puede hacer? Quizás lo más adecuado sea añadir un método publish al controlador de artículos...</p>
+<p>Y varias funcionalidades después nos damos cuenta de que el controlador de artículos vuelve a crecer. Además ahora sí que hay acciones únicamente relacionadas con el artículo, por lo que no se puede sacar una entidad de ahí. Por ejemplo, la acción de publicar un artículo lo único que hace es guardar la fecha de publicación.</p>
+<p>Una opción para evitar que los controladores sigan creciendo es dejar de juntar las acciones relacionadas con un modelo. En su lugar, se creará un controlador por cada acción que se pueda realizar en la API. Estos controladores tendrían un único método, por lo que el controlador representaría en su conjunto a la acción que se quiere realizar.</p>
+<p>Trabajar de esta forma nos permite encapsular cada funcionalidad en su propio controlador, de forma que cumplimos con el principio de responsabilidad única en los controladores. Por otro lado, también nos permite definir un nombre más conciso a cada controlador, de forma que en el propio nombre del mismo quede claro qué acción representa el mismo. Por ejemplo, en el caso de la acción de publicar el artículo, el controlador puede ser <em>PublishPostController</em>.</p>
+<p>Ahora bien, ¿en qué momento se debe comenzar a separar los controladores de esta forma? Bueno... depende. De tu aplicación y del criterio que quieras seguir.</p>
+<p>Al comentar esto con otras personas, la mayoría dijeron que no harían un controlador para cada acción, sino que mantendrían los controladores CRUD, y crearían controladores de una única acción sólo en esos casos en los que una nueva funcionalidad no encaja dentro de un CRUD. Esta idea <a href="https://www.youtube.com/watch?v=FxACh4X-Xc0">la comenta Freek Van der Herten, entre otros pequeños consejos, en su charla <em>Simplification Tips and Tricks</em></a><em>.</em></p>
+<p>También he visto algún caso en el que el controlador mapea directamente con una ruta, y el nombre que tiene se compone de la entidad o acción y del método de HTTP utilizado. Puedes ver un ejemplo en <a href="https://github.com/CodelyTV/cqrs-ddd-php-example/tree/49a662180858e08251a25a83169b600c972dfd11/applications/mooc_backend/src/Controller/Video">el repositorio de ejemplo que utilizan en algunos cursos de CodelyTV</a>. En su caso, <em>VideoPostController</em> sería el controlador para publicar un vídeo, y se asociaría a la ruta <em>POST /videos</em>, mientras que el <em>VideoGetController</em> sería el controlador que obtiene los datos de un vídeo, y se asociaría a la ruta <em>GET /videos/:id</em>.</p>
+<p>Y por último me pareció interesante este artículo titulado <a href="https://jenssegers.com/85/goodbye-controllers-hello-request-handlers"><em>Goodbye controllers, hello request handlers</em></a>, que introduce el concepto de <em>request handler</em> en sustitución del concepto de controlador. En el artículo, el autor comenta las ventajas que le ve a crear un controlador (o <em>request handler</em>) por acción.</p>
+<hr>
+<p>Añado también este artículo, <a href="https://driesvints.com/blog/the-beauty-of-single-action-controllers/">The Beauty of Single Action Controllers</a>, donde también comentan el mismo punto de vista.</p>
+
+		</section>
+	</article>
+</main>
+
+
+	<footer class="Footer site-footer clearfix">
+		<p>&copy; 2014 - 2023</p>
+	</footer>
+
+	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1"
+		xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<symbol id="icon-twitter" viewBox="0 0 24 28">
+				<title>twitter</title>
+				<path class="path1"
+					d="M20 9.531q-0.875 0.391-1.891 0.531 1.062-0.625 1.453-1.828-1.016 0.594-2.094 0.797-0.953-1.031-2.391-1.031-1.359 0-2.32 0.961t-0.961 2.32q0 0.453 0.078 0.75-2.016-0.109-3.781-1.016t-3-2.422q-0.453 0.781-0.453 1.656 0 1.781 1.422 2.734-0.734-0.016-1.563-0.406v0.031q0 1.172 0.781 2.086t1.922 1.133q-0.453 0.125-0.797 0.125-0.203 0-0.609-0.063 0.328 0.984 1.164 1.625t1.898 0.656q-1.813 1.406-4.078 1.406-0.406 0-0.781-0.047 2.312 1.469 5.031 1.469 1.75 0 3.281-0.555t2.625-1.484 1.883-2.141 1.172-2.531 0.383-2.633q0-0.281-0.016-0.422 0.984-0.703 1.641-1.703zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-linkedin" viewBox="0 0 24 28">
+				<title>linkedin</title>
+				<path class="path1"
+					d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906q-0.016-0.812-0.562-1.344t-1.453-0.531-1.477 0.531-0.57 1.344q0 0.797 0.555 1.336t1.445 0.539h0.016q0.922 0 1.484-0.539t0.562-1.336zM16.688 22.094h3.609v-6.219q0-2.406-1.141-3.641t-3.016-1.234q-2.125 0-3.266 1.828h0.031v-1.578h-3.609q0.047 1.031 0 10.844h3.609v-6.062q0-0.594 0.109-0.875 0.234-0.547 0.703-0.93t1.156-0.383q1.813 0 1.813 2.453v5.797zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-github" viewBox="0 0 24 28">
+				<title>github</title>
+				<path class="path1"
+					d="M6.156 21.125q-0.125 0.141-0.313-0.047-0.203-0.172-0.063-0.297 0.125-0.141 0.313 0.047 0.187 0.172 0.063 0.297zM5.5 20.172q0.141 0.187 0 0.297-0.125 0.094-0.266-0.109t0-0.281q0.141-0.109 0.266 0.094zM4.547 19.234q-0.078 0.109-0.203 0.031-0.156-0.078-0.109-0.187 0.047-0.078 0.203-0.031 0.156 0.078 0.109 0.187zM5.031 19.766q-0.094 0.109-0.25-0.047-0.141-0.172-0.031-0.25 0.094-0.094 0.25 0.047 0.141 0.172 0.031 0.25zM7.047 21.516q-0.063 0.187-0.297 0.094-0.266-0.063-0.203-0.234t0.297-0.109q0.25 0.078 0.203 0.25zM8.031 21.594q0 0.172-0.25 0.172-0.266 0.031-0.266-0.172 0-0.172 0.25-0.172 0.266-0.031 0.266 0.172zM8.937 21.438q0.031 0.156-0.219 0.219t-0.281-0.125 0.219-0.234q0.25-0.031 0.281 0.141zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-3.5q-0.25 0-0.383-0.016t-0.305-0.078-0.25-0.227-0.078-0.43v-3.734q0-1.516-0.812-2.219 0.891-0.094 1.602-0.281t1.469-0.609 1.266-1.039 0.828-1.641 0.32-2.352q0-1.891-1.234-3.219 0.578-1.422-0.125-3.187-0.438-0.141-1.266 0.172t-1.437 0.688l-0.594 0.375q-1.453-0.406-3-0.406t-3 0.406q-0.25-0.172-0.664-0.422t-1.305-0.602-1.344-0.211q-0.688 1.766-0.109 3.187-1.234 1.328-1.234 3.219 0 1.328 0.32 2.344t0.82 1.641 1.258 1.047 1.469 0.609 1.602 0.281q-0.625 0.562-0.766 1.609-0.328 0.156-0.703 0.234t-0.891 0.078-1.023-0.336-0.867-0.977q-0.297-0.5-0.758-0.812t-0.773-0.375l-0.313-0.047q-0.328 0-0.453 0.070t-0.078 0.18 0.141 0.219 0.203 0.187l0.109 0.078q0.344 0.156 0.68 0.594t0.492 0.797l0.156 0.359q0.203 0.594 0.688 0.961t1.047 0.469 1.086 0.109 0.867-0.055l0.359-0.063q0 0.594 0.008 1.609t0.008 1.062q0 0.344-0.172 0.523t-0.344 0.203-0.516 0.023h-3.5q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+		</defs>
+	</svg>
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>Gráficos circulares y animaciones de carga o progreso en puro CSS</title>
+	<meta name="description" content="Blog sobre desarrollo de software" />
+
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="referrer" content="no-referrer-when-downgrade" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="/blog.css">
+	<link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet">
+	<link rel="alternate" href="." type="application/atom+xml" title="Iván Abascal Lozano">
+
+	<meta property="og:site_name" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta property="og:description" content="Blog sobre desarrollo de software" />
+	<meta property="og:url" content="https://abalozz.es/" />
+	<meta property="og:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Iván Abascal Lozano - Desarrollador de software" />
+	<meta name="twitter:description" content="Blog sobre desarrollo de software" />
+	<meta name="twitter:url" content="https://abalozz.es/" />
+	<meta name="twitter:image" content="https://abalozz.es/images/2015/02/cover-o-1.jpg" />
+	<meta name="twitter:site" content="@nuzkito" />
+	<meta property="og:image:width" content="3200" />
+	<meta property="og:image:height" content="2368" />
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"publisher": {
+			"@type": "Organization",
+			"name": "Iván Abascal Lozano - Desarrollador de software",
+			"url": "https://abalozz.es/",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://abalozz.es/favicon.ico",
+				"width": 60,
+				"height": 60
+			}
+		},
+		"url": "https://abalozz.es/",
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://abalozz.es/images/2015/02/cover-o-1.jpg",
+			"width": 3200,
+			"height": 2368
+		},
+		"mainEntityOfPage": {
+			"@type": "WebPage",
+			"@id": "https://abalozz.es/"
+		},
+		"description": "Blog sobre desarrollo de software"
+	}
+	</script>
+</head>
+
+<body>
+	<header class="Header">
+		<a href="/" class="main-link">
+			<h1 class="name">Iván Abascal Lozano</h1>
+			<p class="job">Desarrollador de software</p>
+		</a>
+		<div class="social-links">
+			<a class="social-link" target="_blank" href="https://twitter.com/nuzkito">
+				<svg class="icon icon-twitter">
+					<use xlink:href="#icon-twitter"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://github.com/abalozz">
+				<svg class="icon icon-github">
+					<use xlink:href="#icon-github"></use>
+				</svg>
+			</a>
+			<a class="social-link" target="_blank" href="https://www.linkedin.com/in/abalozz/">
+				<svg class="icon icon-linkedin">
+					<use xlink:href="#icon-linkedin"></use>
+				</svg>
+			</a>
+		</div>
+	</header>
+
+	
+<main class="Content" role="main">
+	<article class="Post">
+		<header class="Post-header">
+				<h1 class="Post-title">Gráficos circulares y animaciones de carga o progreso en puro CSS</h1>
+			<section class="Post-meta">
+				<time class="Post-date" datetime="2014-07-28T16:25:17.000Z">28 de julio de 2014</time>
+				<span class="Post-readingTime">
+					5 minutos de lectura
+				</span>
+				<div class="Post-tags"><a href="/tag/CSS">CSS</a></div>
+			</section>
+		</header>
+		<section class="Post-content">
+			<p>Hace unos días vi un ejemplo de <a href="http://lea.verou.me/">Lea Verou</a> en el que hacía un <a href="http://dabblet.com/gist/127de0e3bb8ae0bbb75b">gráfico circular animado con CSS</a> de una forma muy sencilla. Usando pseudo-elementos, gradientes y formas se pueden crear gŕaficos simples o animaciones de carga para nuestros sitios web. Veamos cómo.</p>
+<h2>Lógica del gráfico circular</h2>
+<p>En CSS, por ahora, no hay una propiedad que nos permita crear gráficos circulares de una forma sencilla, por lo que debemos ingeniarnosla para simularlo. Para simular el gráfico combinaremos el uso de semicírculos y animaciones.</p>
+<p>Dos semicírculos del mismo color forman un círculo completo, el cual podemos considerar como un gráfico al 0%, o al 100%. Cuando giramos uno de los semicírculos, el gŕafico empieza a indicar 1%, 2%, 5%, 10%, etc., así hasta el 50%. Si seguimos girando, como la segunda mitad no se ha movido y sigue cambiando de color, el círculo se volverá a rellenar.</p>
+<p>Para simular que el gráfico se completa del 0 al 100% haremos que el semicírculo, cuando haya dado media vuelta - es decir, el gráfico estará al 50% - haremos que vuelva a la posición inicial y cambie al color de fondo. Una vez haya hecho eso, seguimos girando el semicírculo.</p>
+<h2>Código paso a paso</h2>
+<p>El código HTML necesario tan solo es una capa, a la que pondremos una clase:</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>grafico-circular<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>El resto lo haremos con CSS.</p>
+<p>Comencemos haciendo el círculo:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.grafico-circular</span> <span class="token punctuation">{</span>
+	<span class="token property">background-color</span><span class="token punctuation">:</span> #7fdbff<span class="token punctuation">;</span>
+	<span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+	<span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+	<span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>La propiedad overflow se aplica para evitar que las capas que conformarán los semicírculos provoquen scrolls indeseados.</p>
+<p>Solo se moverá uno de los semicírculos, por lo que podemos simular una mitad haciendo uso de un gradiente. En este caso el color para la mitad izquierda del círculo será el del gráfico vacío, y la mitad derecha tendrá el color del gráfico lleno:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.grafico-circular</span> <span class="token punctuation">{</span>
+	<span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>90deg<span class="token punctuation">,</span> #7fdbff 50%<span class="token punctuation">,</span> #0074d9 0<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Recuerden que el gradiente debe ir en la propiedad <code>background-image</code>, no en <code>background-color</code>. Suele ser un error bastante común.</p>
+<p>Ahora haremos el semicírculo para tapar la segunda mitad. Aprovecharemos el pseudo-elemento <code>:before</code>:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.grafico-circular:before</span> <span class="token punctuation">{</span>
+	<span class="token property">background-color</span><span class="token punctuation">:</span> #7fdbff<span class="token punctuation">;</span>
+	<span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">;</span>
+	<span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+	<span class="token property">margin-left</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+	<span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>No es más que un rectángulo que ocupa la mitad derecha del círculo. Hay algunos navegadores que muestran el rectángulo completo a pesar de haber puesto <code>overflow: hidden;</code>. Para corregir eso podemos usar <code>border-radius</code> y darle al rectángulo forma de semicírculo:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.grafico-circular:before</span> <span class="token punctuation">{</span>
+	<span class="token property">border-radius</span><span class="token punctuation">:</span> 0 100% 100% 0 / 50%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Ya esta casi todo listo. Solo falta girar el semicírculo. Eso podemos hacerlo con la propiedad <code>transform</code>. Hay un pequeño problema, y es que al aplicar un giro a una capa, el centro de rotación se toma en el punto <code>x=0,y=0</code> de la capa, es decir, desde la esquina superior izquierda. Para solventar esto aplicaremos la propiedad transform-origin, que sirve para indicar el punto de origen de una transformación:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.grafico-circular:before</span> <span class="token punctuation">{</span>
+	<span class="token property">transform-origin</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
+	<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>30deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Podemos ver que modificando el valor de rotación ya tenemos el gráfico listo. O al menos la primera mitad. Pasemos ahora a animarlo. Usaremos las animaciones para completar el giro.</p>
+<p>Primero hagamos que el semicírculo rote. Antes mencioné que el semicírculo solo iba a hacer medio giro, y después cambiaría de color para volver a hacer otro medio giro y completar el círculo. Para eso haremos dos animaciones, una para cada cosa:</p>
+<pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@keyframes</span> spin-rotate</span> <span class="token punctuation">{</span>
+	<span class="token selector">to</span> <span class="token punctuation">{</span>
+		<span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span>180deg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token atrule"><span class="token rule">@keyframes</span> spin-color</span> <span class="token punctuation">{</span>
+	<span class="token selector">50%</span> <span class="token punctuation">{</span>
+		<span class="token property">background-color</span><span class="token punctuation">:</span> #0074d9<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Y ponemos la propiedad <code>animate</code> en el pseudo-elemento:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.grafico-circular:before</span> <span class="token punctuation">{</span>
+	<span class="token property">animation</span><span class="token punctuation">:</span> spin-rotate 3s linear infinite<span class="token punctuation">,</span> spin-color 6s step-end infinite<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Como el semicírculo solo hace la mitad del giro, la animación de este debe durar la mitad que la animación del cambio de color. Por otro lado,el color debe cambiar de golpe, y no transicionar como sí hace el giro. Para eso añadimos <code>step-end</code>.</p>
+<p>Y con esto, ¡<em>voilá</em>!, ya tenemos el gráfico circular hecho, con animación incluida. Modificando los valores de la animación podemos hacer que el gráfico se rellene hasta el punto que queramos y pararlo ahí. El problema de esta solución es que solo se pueden mostrar dos partes, pero puede usarse para mostrar, por ejemplo, un progreso, o como animación de carga.</p>
+<hr>
+<p>Puede que algunos quieran que al dar una vuelta, la siguiente contunúe con el color contrario en lugar de empezar de nuevo. Para hacer eso modificaremos las animaciones.</p>
+<p>El semicírculo sigue rotando de la misma forma, por lo que no tocaremos la rotación. La animación del color la modificaremos de la siguiente forma:</p>
+<pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@keyframes</span> spin-color</span> <span class="token punctuation">{</span>
+	<span class="token selector">25%</span> <span class="token punctuation">{</span>
+		<span class="token property">background-color</span><span class="token punctuation">:</span> #0074d9<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token selector">75%</span> <span class="token punctuation">{</span>
+		<span class="token property">background-color</span><span class="token punctuation">:</span> #7fdbff<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Cada 25% equivale a media vuelta, es decir, el semicírculo hará medio giro y volverá a su posición inicial. En la primera media vuelta (0%-25%) el color será el que le hemos puesto a la capa por defecto, por lo que no hace falta indicarlo. Las segunda y tercera medias vueltas tiene que tener el segundo color. Y la última vuelve al color inicial. Ahora la animación equivale a dos vueltas, por lo que tenemos que multiplicar por 2 el tiempo de esta animación.</p>
+<p>Aparte del semicírculo, también tenemos que modificar el color de fondo del círculo. El problema que hay ahora es que necesitamos invertir los colores una vez termine la primera vuelta.</p>
+<p>Recordemos que lo hacíamos con un gradiente, que viene a ser una imagen generada con una función de CSS. En lugar de modificar el gradiente de nuevo, lo que haremos será simplemente mover el fondo:</p>
+<pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@keyframes</span> bg-circle</span> <span class="token punctuation">{</span>
+	<span class="token selector">50%</span> <span class="token punctuation">{</span>
+		<span class="token property">background-position</span><span class="token punctuation">:</span> 100px 0<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Lo que hacemos es simplemente mover el fondo a la derecha. Concretamente hay que moverlo la mitad del ancho del círculo.</p>
+<p>Las animaciones quedarían de esta forma:</p>
+<pre class="language-css"><code class="language-css"><span class="token selector">.grafico-circular</span> <span class="token punctuation">{</span>
+	<span class="token property">animation</span><span class="token punctuation">:</span> bg-circle 12s step-end infinite<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.grafico-circular:before</span> <span class="token punctuation">{</span>
+	<span class="token property">animation</span><span class="token punctuation">:</span> spin-rotate 3s linear infinite<span class="token punctuation">,</span> spin-color 12s step-end infinite<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>La animación del semicírculo dura la mitad del tiempo en dar una vuelta, y el resto, el doble.</p>
+<p>Por supuesto, aquí está el ejemplo completo:</p>
+<p data-height="256" data-theme-id="0" data-slug-hash="ukLCf" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/abalozz/pen/ukLCf/'>Animated pie chart - style loader with CSS</a> by Iván Abascal Lozano (<a href='http://codepen.io/abalozz'>@abalozz</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+		</section>
+	</article>
+</main>
+
+
+	<footer class="Footer site-footer clearfix">
+		<p>&copy; 2014 - 2023</p>
+	</footer>
+
+	<svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1"
+		xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<defs>
+			<symbol id="icon-twitter" viewBox="0 0 24 28">
+				<title>twitter</title>
+				<path class="path1"
+					d="M20 9.531q-0.875 0.391-1.891 0.531 1.062-0.625 1.453-1.828-1.016 0.594-2.094 0.797-0.953-1.031-2.391-1.031-1.359 0-2.32 0.961t-0.961 2.32q0 0.453 0.078 0.75-2.016-0.109-3.781-1.016t-3-2.422q-0.453 0.781-0.453 1.656 0 1.781 1.422 2.734-0.734-0.016-1.563-0.406v0.031q0 1.172 0.781 2.086t1.922 1.133q-0.453 0.125-0.797 0.125-0.203 0-0.609-0.063 0.328 0.984 1.164 1.625t1.898 0.656q-1.813 1.406-4.078 1.406-0.406 0-0.781-0.047 2.312 1.469 5.031 1.469 1.75 0 3.281-0.555t2.625-1.484 1.883-2.141 1.172-2.531 0.383-2.633q0-0.281-0.016-0.422 0.984-0.703 1.641-1.703zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-linkedin" viewBox="0 0 24 28">
+				<title>linkedin</title>
+				<path class="path1"
+					d="M3.703 22.094h3.609v-10.844h-3.609v10.844zM7.547 7.906q-0.016-0.812-0.562-1.344t-1.453-0.531-1.477 0.531-0.57 1.344q0 0.797 0.555 1.336t1.445 0.539h0.016q0.922 0 1.484-0.539t0.562-1.336zM16.688 22.094h3.609v-6.219q0-2.406-1.141-3.641t-3.016-1.234q-2.125 0-3.266 1.828h0.031v-1.578h-3.609q0.047 1.031 0 10.844h3.609v-6.062q0-0.594 0.109-0.875 0.234-0.547 0.703-0.93t1.156-0.383q1.813 0 1.813 2.453v5.797zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-15q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+			<symbol id="icon-github" viewBox="0 0 24 28">
+				<title>github</title>
+				<path class="path1"
+					d="M6.156 21.125q-0.125 0.141-0.313-0.047-0.203-0.172-0.063-0.297 0.125-0.141 0.313 0.047 0.187 0.172 0.063 0.297zM5.5 20.172q0.141 0.187 0 0.297-0.125 0.094-0.266-0.109t0-0.281q0.141-0.109 0.266 0.094zM4.547 19.234q-0.078 0.109-0.203 0.031-0.156-0.078-0.109-0.187 0.047-0.078 0.203-0.031 0.156 0.078 0.109 0.187zM5.031 19.766q-0.094 0.109-0.25-0.047-0.141-0.172-0.031-0.25 0.094-0.094 0.25 0.047 0.141 0.172 0.031 0.25zM7.047 21.516q-0.063 0.187-0.297 0.094-0.266-0.063-0.203-0.234t0.297-0.109q0.25 0.078 0.203 0.25zM8.031 21.594q0 0.172-0.25 0.172-0.266 0.031-0.266-0.172 0-0.172 0.25-0.172 0.266-0.031 0.266 0.172zM8.937 21.438q0.031 0.156-0.219 0.219t-0.281-0.125 0.219-0.234q0.25-0.031 0.281 0.141zM24 6.5v15q0 1.859-1.32 3.18t-3.18 1.32h-3.5q-0.25 0-0.383-0.016t-0.305-0.078-0.25-0.227-0.078-0.43v-3.734q0-1.516-0.812-2.219 0.891-0.094 1.602-0.281t1.469-0.609 1.266-1.039 0.828-1.641 0.32-2.352q0-1.891-1.234-3.219 0.578-1.422-0.125-3.187-0.438-0.141-1.266 0.172t-1.437 0.688l-0.594 0.375q-1.453-0.406-3-0.406t-3 0.406q-0.25-0.172-0.664-0.422t-1.305-0.602-1.344-0.211q-0.688 1.766-0.109 3.187-1.234 1.328-1.234 3.219 0 1.328 0.32 2.344t0.82 1.641 1.258 1.047 1.469 0.609 1.602 0.281q-0.625 0.562-0.766 1.609-0.328 0.156-0.703 0.234t-0.891 0.078-1.023-0.336-0.867-0.977q-0.297-0.5-0.758-0.812t-0.773-0.375l-0.313-0.047q-0.328 0-0.453 0.070t-0.078 0.18 0.141 0.219 0.203 0.187l0.109 0.078q0.344 0.156 0.68 0.594t0.492 0.797l0.156 0.359q0.203 0.594 0.688 0.961t1.047 0.469 1.086 0.109 0.867-0.055l0.359-0.063q0 0.594 0.008 1.609t0.008 1.062q0 0.344-0.172 0.523t-0.344 0.203-0.516 0.023h-3.5q-1.859 0-3.18-1.32t-1.32-3.18v-15q0-1.859 1.32-3.18t3.18-1.32h15q1.859 0 3.18 1.32t1.32 3.18z">
+				</path>
+			</symbol>
+		</defs>
+	</svg>
+</body>
+
+</html>

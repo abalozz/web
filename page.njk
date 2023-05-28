@@ -1,0 +1,50 @@
+---
+layout: layout
+pagination:
+    data: collections.all
+    size: 20
+    alias: posts
+    reverse: true
+permalink: /{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}
+eleventyExcludeFromCollections: true
+---
+
+<main class="content" role="main">
+	{%- for post in posts -%}
+		<article class="Post">
+			<header class="Post-header">
+				<h2 class="Post-title">
+					<a href="{{ post.page.url }}">{{ post.data.title }}</a>
+				</h2>
+			</header>
+			{% if post.data.description %}
+				<section class="Post-excerpt">
+					<p>{{ post.data.description }}</p>
+				</section>
+			{% endif %}
+			<footer class="Post-meta">
+				<time class="Post-date" datetime="{{ post.data.date_published.toString() }}">
+					{{ post.data.date_published.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) }}
+				</time>
+				<span class="Post-readingTime">
+					{{ post | timeToRead }} de lectura
+				</span>
+				<div class="Post-tags">
+					{%- for tag in post.data.tags -%}
+						<a href="/tag/{{ tag }}">{{ tag }}</a>
+					{%- endfor -%}
+				</div>
+			</footer>
+		</article>
+	{%- endfor -%}
+
+	<nav class="Pagination" role="navigation">
+		{% if pagination.href.previous %}
+			<a class="Pagination-newerPosts" href="{{ pagination.href.previous }}">&larr; Recientes</a>
+		{%- endif %}
+		<span class="Pagination-pageNumber">Página {{ pagination.pageNumber + 1 }} de {{ pagination.pages.length }}</span>
+		{% if pagination.href.next %}
+			<a class="Pagination-olderPosts" href="{{ pagination.href.next }}">Anteriores &rarr;</a>
+		{% endif %}
+	</nav>
+</main>
